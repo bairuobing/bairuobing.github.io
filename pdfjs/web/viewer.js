@@ -10051,7 +10051,7 @@ exports.ViewHistory = ViewHistory;
 "use strict";
 
 
-var DEFAULT_URL = '';
+var DEFAULT_URL = 'portfolio.pdf';
 ;
 var pdfjsWebApp = void 0;
 {
