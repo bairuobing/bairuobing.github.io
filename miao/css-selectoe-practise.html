@@ -358,6 +358,14 @@
     div.thousand ol li:nth-child(7n + 49) {
         color: black;
     }
+    li {
+    /*遍历 DOM 的过程中，每遇到 li 就让 nature-count 计数器变量的值加一*/
+        counter-increment: nature-count;
+    }
+    li::before {
+    /*在 li 的 before 伪元素中插入计数器变量 nature-count 当前的值*/
+        content: counter(nature-count);
+    }
     </style>
     
     <div class="thousand">
