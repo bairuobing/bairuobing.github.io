@@ -13,12 +13,14 @@
         color: red;
     }
     /*似乎是来不及表现*/
-    p.a:not(.c):active {
-        color: green;
-    }
+    
     p.a:not(.c):focus {
         color: blue;
     }
+    p.a:not(.c):active {
+        color: green;
+    }
+
     p span {
         color: red;
     }
@@ -358,7 +360,12 @@
     div.thousand ol li:nth-child(7n + 49) {
         color: black;
     }
-    
+     li{
+    display: inline-block;
+    width: 50px;
+    font-size: 12px;
+  }
+  
     </style>
     
     <div class="thousand">
