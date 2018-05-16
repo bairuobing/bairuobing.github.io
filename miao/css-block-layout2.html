@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>cssbl</title>
+    <style type="text/css">
+        html,body {
+            margin: 0;
+        }
+        header {
+            margin: auto;
+            background-color: pink;
+            padding-left: calc((100% - 600px) / 2);
+            padding-right: calc((100% - 600px) / 2);
+        }
+
+        main {
+            width: 600px;
+            margin: auto;
+        }
+
+        ul {
+            padding: 0;
+            /*width: 600px;*/
+            margin: auto;
+            margin-left: -15px;
+
+        }
+
+        li {
+            width: 180px;
+            height: 40px;
+            box-sizing: border-box;
+            list-style: none;
+            border:3px solid;
+            margin: 15px;
+        }
+
+        li:nth-child(n + 5) {
+            margin-left: 225px;
+        }
+
+        li:nth-child(n + 9) {
+            margin-left: 435px;
+        }
+
+        li:nth-child(4n + 5) {
+            margin-top: -220px;
+        }
+    </style>
+</head>
+<body>
+    <header>Lorem ipsum dolor sit amet.</header>
+    <main>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt soluta commodi omnis hic ab dolorem corrupti dolorum ad. Nobis quibusdam a officiis sequi facere accusamus doloremque. Quod placeat pariatur atque.
+        <ul>
+        <li>产品01</li>
+        <li>产品02</li>
+        <li>产品03</li>
+        <li>产品04</li>
+        <li>产品05</li>
+        <li>产品06</li>
+        <li>产品07</li>
+        <li>产品08</li>
+        <li>产品09</li>
+        <li>产品10</li>
+        <li>产品11</li>
+        <li>产品12</li>
+    </ul>
+    </main>
+    
+</body>
+</html>
