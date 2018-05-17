@@ -13,7 +13,6 @@
         background-attachment: fixed;
         box-sizing: border-box;
         border-bottom: 1px solid;
-
     }
 
     .a {
@@ -31,7 +30,38 @@
     .d {
         background-image: url(./photo/iphone3.png);
     }
+    
+    .logo {
+        transition: background-position 0.4s;
+        height: 100px;
+        width: 100px;
+        background-image: url(./photo/hover.png);
+        background-size: 200px;
+        background-repeat: no-repeat;
+    }
 
+    .logo:hover {
+        background-position: -100px 0;
+    }
+
+    body {
+        background-attachment: fixed;
+        margin:0;
+        background-image: url(./photo/wave0.jpg);
+        background-repeat: no-repeat;
+    }
+
+    .essay {
+        /*相对于视口固定*/
+        background-attachment: fixed;
+        height: 100vh;
+        border:5px solid;
+        margin-top: 100px;
+        margin-left: 10%;
+        margin-right: 10%;
+        background-image: url(./photo/wave1.jpg);
+        background-repeat: no-repeat;
+    }
 </style>
 <body>
     <!-- 手机视差滚动效果 -->
@@ -39,6 +69,17 @@
     <div class="b q"></div>
     <div class="c q"></div>
     <div class="d q"></div>
+    <hr>
 
+    <!-- 小米首页返回动效 -->
+    <h3>小米返回键</h3>
+    <div class="logo"></div>
+    <hr>
+
+    <!-- 仿权威指南效果 -->
+    <div class="essay">
+        <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quis aperiam minima exercitationem sequi nemo aliquam sint deleniti expedita veniam ab, necessitatibus fuga omnis totam voluptatibus dolorem mollitia nostrum impedit provident?</span><br>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officia corporis sunt illo ipsa debitis, nesciunt perspiciatis distinctio, voluptatibus vero! Illo laborum placeat nesciunt nemo expedita iure voluptatem sequi, dicta esse! <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam alias labore modi, ipsum esse quibusdam dicta quia similique id, vel architecto officia consectetur consequatur vitae quasi ut nam, fugiat ab.</span><br><span>Tempore, fuga laudantium explicabo iste inventore totam. Neque voluptas quam amet quaerat repellat id maiores itaque nisi ab ea deleniti, numquam officiis corrupti ex, illo similique libero deserunt, quo corporis.</span><br><span>Modi vero, atque eos esse, eaque quos quas iure eveniet, dolores, magnam id doloribus consectetur ducimus tempora doloremque at aliquid recusandae voluptates ab aut fugit temporibus vitae numquam. Ad, sunt.</span>
+
+    </div>
 </body>
 </html>
