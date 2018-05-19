@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ios-checkbox</title>
+    <!-- <meta http-equiv="refresh" content="3"> -->
+    <style>
+        /*iosUI标准 外圆角矩形122*62 内圆56px*/
+        body {
+            background-color: #eee;
+        }
+
+        input {
+            display:none;
+        }
+
+        .on-off {
+            xbackground-color: pink;
+            width: 122px;
+            height: 62px;
+
+        }
+        
+        label {
+            xbackground-color: tan;
+            xbox-shadow: 1px 1px 1px 1px rgba(0,0,0,0.1);
+            border: 1px solid rgba(0,0,0,0.1);
+            position: relative;
+            display: block;
+            cursor: pointer; 
+            border-radius: 31px;
+            width: 100%;
+            height: 100%;
+        }
+
+        label::before {
+            background-color: white;
+            box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.1);
+            content: '';
+            position: absolute;
+            display: block;
+            margin: 3px;
+            border-radius: 31px;
+            width: 56px;
+            height: 56px;
+            transition: all 0.3s ease; 
+        }
+
+        label::after {
+            background-color: white;
+            content: '';
+            display: block;
+            border-radius: 31px;
+            width: 100%;
+            height: 100%;
+            transition: all 0.3s ease; 
+        }
+        
+        input:checked+label::before {
+            transform: translateX(59px);
+        }
+
+        input:checked+label::after {
+            background-color: #4cda64;
+        }
+    </style>
+</head>
+<body>
+    <div class="on-off">
+        <input type="checkbox" name="check" id="check">
+        <label for="check"></label>
+    </div>
+</body>
+</html>
