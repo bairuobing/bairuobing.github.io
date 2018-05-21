@@ -79,6 +79,10 @@
             background-image: url(https://abs.twimg.com/a/1526339738/img/animations/web_heart_animation_edge.png);
             background-repeat: no-repeat;
         }
+        /*鼠标悬浮预变化*/
+        .heart-area:hover {
+            background-position: -100px 0;
+        }
         
         #like:checked+.heart-area {
             animation: heart-variation 1s steps(28); 
@@ -103,10 +107,17 @@
             top: 34px;
             left: 34px;
         }
-
+        
+        .intro {
+            font-family: 
+            font-size: 14px;
+        }
     </style>
 </head>
 <body>
+    <div class="intro">ios标准尺寸: 外: 122px * 62px 内: 56px * 56px</div>
+    <hr>
+    <br>
     <div class="on-off">
         <input type="checkbox" name="check" id="check">
         <label class="on-off-area" for="check"></label>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>menu</title>
+    <style>
+        .nav li {
+            display: block;
+            background-color: pink;
+            width: 200px;
+            border: 1px solid;
+            list-style: none;
+        }
+        
+        .secondM li,.thirdM li {
+            display: none;
+        }
+
+        .firstM li:hover > ul {
+            display: block;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="nav">
+        <ul class="firstM">
+            <li>
+                <a href="">选择器</a>
+                <ul class="secondM">
+                    <li>
+                        <a href="">类选择器</a>
+                        <ul class="thirdM">
+                            <li><a href="">类</a></li>
+                            <li><a href="">类</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="">id选择器</a>
+                        <ul class="thirdM">
+                            <li><a href="">id</a></li>
+                            <li><a href="">id</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="">属性选择器</a>
+                        <ul class="thirdM">
+                            <li><a href="">属性</a></li>
+                            <li><a href="">属性</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="">伪类选择器</a>
+                        <ul class="thirdM">
+                            <li><a href="">伪类</a></li>
+                            <li><a href="">伪类</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li>111</li>
+        </ul>
+    </div>
+</body>
+</html>
