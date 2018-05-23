@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>footer-at-bottom</title>
+    <style>
+        span.blog {
+            display: inline-block;
+            padding-bottom: 0; 
+            width: 202px;
+            line-height: 150px;
+            vertical-align: bottom;
+            background-color: aqua;
+            cursor: pointer;
+            transition: all 1s ease;
+        }
+
+        span.blog:hover {
+            background-color: tan;
+            font-size: 3rem;
+        }
+
+        table {
+            border-collapse: collapse;
+        }
+
+        td {
+            position: relative;
+            box-sizing: border-box;
+            border: 7px solid tan;
+            padding: 1.35rem 1.5rem;
+        }
+
+        td:hover div {
+            position: absolute;
+            top: -7px;
+            left: -7px;
+            border: 7px solid pink;
+            padding: 1.35rem 1.5rem;
+        }
+
+        body {
+            margin: 0;
+        }
+
+        .footer {
+            width: 100%;
+            height: 60px;
+            line-height: 60px;
+            background-color: pink;
+        }
+        
+        .container {
+            min-height: calc(100vh - 76px);
+        }
+
+    </style>
+</head>
+<body>
+    <main role="main" class="container">
+        <span class="blog">订阅博客</span>
+        <table>
+            <tbody>
+                <tr>
+                    <td><div>1</div></td>
+                    <td><div>2</div></td>
+                    <td><div>3</div></td>
+                </tr>
+                <tr>
+                    <td><div>4</div></td>
+                    <td><div>5</div></td>
+                    <td><div>6</div></td>
+                </tr>
+                <tr>
+                    <td><div>7</div></td>
+                    <td><div>8</div></td>
+                    <td><div>9</div></td>
+                </tr>
+            </tbody>
+        </table>
+    <!-- ------------------------------分割线------------------------------ -->
+        <h1>Sticky footer</h1>
+        <p>Pin a fixed-height footer to the bottom of the viewport in desktop browsers with this custom HTML and CSS. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique reprehenderit laboriosam libero minus a labore accusantium. Eaque non doloremque officiis, similique, voluptate atque hic culpa. Dolor deleniti similique rerum, et.</p>
+        <p>Pin a fixed-height footer to the bottom of the viewport in desktop browsers with this custom HTML and CSS. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique reprehenderit laboriosam libero minus a labore accusantium. Eaque non doloremque officiis, similique, voluptate atque hic culpa. Dolor deleniti similique rerum, et.</p>
+        
+        
+    </main>
+    <footer class="footer">
+        <div class="container-foot">
+            <span class="text-muted">Place sticky footer content here.</span>
+        </div>
+    </footer>
+</body>
+</html>
