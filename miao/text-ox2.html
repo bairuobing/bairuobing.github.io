@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>table-way</title>
+    <style>
+        * {
+            margin: 0;
+        }
+        .aside{
+            background-color: pink;
+        }
+        .main{
+            background-color: aqua;
+        }
+        .l-right{
+            background-color: violet;
+        }
+        .r-right{
+            background-color: tan;
+        }
+
+        .container {
+            position: absolute;
+            right: 0;
+            display: table;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        .aside,.main,.l-right,.r-right {
+            display: table-cell;
+        }
+
+        .aside {
+            min-width: 0;
+            width: 200px;
+        }
+
+        .main {
+            min-width: 0;
+        }
+
+        .l-right,.r-right {
+            width: 200px;
+            min-width: 200px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="aside">aside</div>
+        <div class="main">main</div>
+        <div class="l-right">l-right</div>
+        <div class="r-right">r-right</div>
+    </div>
+</body>
+</html>

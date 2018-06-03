@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>first-way</title>
+    <style>
+        * {
+            margin: 0;
+        }
+        .aside{
+            background-color: pink;
+        }
+        .main{
+            background-color: aqua;
+        }
+        .l-right{
+            background-color: violet;
+        }
+        .r-right{
+            background-color: tan;
+        }
+        
+        .aside {
+            float: left;
+        }
+
+        .l-right,.r-right {
+            position: absolute;
+        }
+
+        .aside {
+            width: 200px;
+            height: 100vh;
+        }
+
+        .main {
+            width: calc(100vw - 600px);
+            margin-left: 200px;
+            height: 100vh;
+        }
+
+        .l-right {
+            top: 0;
+            right: 200px;
+            width: 200px;
+            height: 100vh;
+        }
+
+        .r-right {
+            top: 0;
+            right: 0;
+            width: 200px;
+            height: 100vh;
+        }
+    </style>
+</head>
+<body>
+    <div class="aside">aside</div>
+    <div class="main">main</div>
+    <div class="l-right">l-right</div>
+    <div class="r-right">r-right</div>
+</body>
+</html>

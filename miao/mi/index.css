@@ -1,0 +1,401 @@
+/*
+* @Author: BaiRuobing
+* @Date:   2018-05-28 17:19:32
+* @Last Modified by:   Win
+* @Last Modified time: 2018-06-02 21:18:07
+*/
+body {
+    --n: calc(n);
+    margin: 0;
+    color: #333;
+    background-color: #fff;
+    min-width: 1226px;
+}
+button, input, select, textarea {
+    font-size: 100%;
+    margin: 0;
+    vertical-align: baseline;
+}
+/*顶栏广告*/
+.top-ad-bar {
+    position: relative;
+    background-image: url(./img/top-ad-bar.jpg);
+    background-position: center 0;
+    width: 100%;
+    height: 120px;
+}
+.top-ad-bar a {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+/*顶部导航栏*/
+.topbar {
+    position: relative;
+    background-color: #333;
+    color: #b0b0b0;
+    height: 40px;
+    width: 100%; 
+    font-size: 12px;
+}
+.container {
+    width: 1226px;
+    margin-right: auto;
+    margin-left: auto;
+}
+.topbar a {
+    text-decoration: none;
+    line-height: 40px;
+    color: #b0b0b0;
+}
+.topbar a:hover {
+    color: #fff;
+}
+.topbar-nav {
+    float: left;
+}
+.separator {
+    margin: 0.5em;
+}
+.topbar-cart {
+    position: relative;
+    background: #424242;
+    float: right;
+    margin-left: 15px;
+    width: 120px;
+    height: 40px;
+    text-align: center;
+}
+.topbar-cart .iconcart {
+    font-style: normal;
+    margin-right: 4px;
+    font-size: 20px;
+    line-height: 20px;
+}
+.cart-menu {
+    background-color: #fff;
+    position: absolute;
+    top: 40px;
+    right: 0;
+    z-index: -100;
+    width: 316px;
+    height: 0;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+    transition: all .3s .2s;
+}
+.topbar-cart:hover {
+    background: #fff;
+}
+/*悬停变色*/
+.topbar-cart:hover a,
+.topbar-cart:hover i,
+.topbar-cart:hover span {
+    color: #ff6700;
+}
+.topbar-cart:hover .cart-menu {
+    z-index: 50;
+    height: 100px;
+}
+.cart-menu .loading {
+    text-align: center;
+    margin: 40px;
+}
+/*载入动画，关于矩形顶端不便的问题还未解决*/
+.loader {
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    left: -8px;
+    height: 20px;
+    width: 4px;
+    background-color: #ff6700;
+    animation: loader-movement 0.7s linear infinite;
+}
+.loader::before {
+    position: absolute;
+    left: 8px;
+    content: '';
+    height: 20px;
+    width: 4px;
+    background-color: red;
+    animation: loader-movement 0.7s linear 0.2s infinite;
+}
+.loader::after {
+    position: absolute;
+    left: 16px;
+    content: '';
+    height: 20px;
+    width: 4px;
+    background-color: #ff6700;
+    animation: loader-movement 0.7s linear 0.4s infinite;
+}
+@keyframes loader-movement {
+    0% { 
+        height: 20px; 
+    }
+    50% {
+        height: 10px; 
+    }
+    100% { 
+        height: 20px; 
+    }
+}
+/*topbar-info*/
+.topbar-info {
+    float: right;
+}
+
+/*header*/
+.header {
+    position: relative;
+    height: 100px;
+    width: 100%;
+}
+.header-logo {
+    float: left;
+    margin-top: 22px; 
+}
+.header .logo {
+    display: block;
+    width: 55px;
+    height: 55px;
+    overflow: hidden;
+    background-color: #ff6700;
+    background-image: url(./img/logo.png);
+    background-size: 55%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.header-nav {
+    float: left;
+    width: 850px;
+}
+.nav-list {
+    float: left;
+    margin: 0;
+    width: 820px;
+    height: 88px;
+    padding: 12px 0 0 172px;
+    list-style-type: none;
+    font-size: 16px;
+}
+.header .nav-item .link {
+    float: left;
+    padding: 26px 10px 38px;
+    text-decoration: none;
+    color: #333;
+}
+.nav-item:hover .link{
+    color: #ff6700;
+}
+
+/*-----------小米手机、红米等导航栏移出效果待完成-------------*/
+.header .header-search {
+    position: relative;
+    float: right;
+    width: 296px;
+    margin-top: 25px;
+}
+.search-form {
+    position: relative;
+    width: 296px;
+    height: 50px;
+
+}
+.search-form:hover input {
+    border: 1px solid #757575;
+}
+    .search-text {
+        z-index: 1;
+        box-sizing: content-box;
+        position: absolute;
+        top: 0;
+        right: 51px;
+        width: 223px;
+        height: 48px;
+        padding: 0 10px;
+        border: 1px solid #e0e0e0;
+        font-size: 14px;
+        line-height: 48px;
+        outline: 0;
+        transition: all .3s .2s;
+    }
+        .search-hot-word {
+        z-index: 2;
+        position: absolute;
+        top: 14px;
+        right: 62px;
+        }
+        .search-hot-word a {
+            display: inline-block;
+            margin-left: 5px;
+            padding: 2px 5px;
+            font-size: 12px;
+            color: #757575;
+            background: #eee;
+            text-decoration: none;
+            transition: all .3s;
+        }
+        .search-hot-word a:hover {
+            color: #fff;
+            background: #ff6700;
+        }
+    .search-btn {
+        cursor: pointer;
+        z-index: 2;
+        position: absolute;
+        right: 0;
+        top: 0;
+        z-index: 2;
+        width: 52px;
+        height: 50px;
+        border: 1px solid #e0e0e0;
+        font-size: 24px;
+        line-height: 24px;
+        background: #fff;
+        color: #616161;
+        outline: 0;
+        transition: all .3s .2s;
+    }
+    .search-btn:hover {
+        color: #fff;
+        background: #ff6700;
+        border: 1px solid #ff6700 !important;
+    }
+/*header-nav的菜单列表*/
+.header-nav-manu {
+    position: absolute;
+    top: 100px;
+    left: 0;
+    height: 0px;
+    width: 100%;
+    border-top: 1px solid #fff;
+    box-sizing: border-box;
+    overflow: hidden;
+    background-color: #fff;
+    transition: all .3s .2s;
+}
+/*父子元素hover*/
+.nav-item:hover .header-nav-manu {
+    height: 229px;
+    border-top: 1px solid #e0e0e0;
+    box-shadow: 0 3px 4px rgba(0,0,0,0.18); 
+}
+.children-list {
+    position: absolute;
+    float: left;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    font-size: 12px; 
+}
+
+    .children-list li {
+        position: relative;
+        float: left;
+        width: 180px;
+        padding: 35px 12px 0;
+        text-align: center;
+    }
+    .children-list li div,.children-list li a{
+        display: block;
+        cursor: pointer;
+    }
+    .children-list li:nth-child(1) .figure {
+        background-repeat: no-repeat;
+        background-image: url(./img/header-phone/1.png);
+    }
+    .children-list li:nth-child(2) .figure {
+        background-repeat: no-repeat;
+        background-image: url(./img/header-phone/2.png);
+    }
+    .children-list li:nth-child(3) .figure {
+        background-repeat: no-repeat;
+        background-image: url(./img/header-phone/3.jpg);
+    }
+    .children-list li:nth-child(4) .figure {
+        background-repeat: no-repeat;
+        background-image: url(./img/header-phone/4.png);
+    }
+    .children-list li:nth-child(5) .figure {
+        background-repeat: no-repeat;
+        background-image: url(./img/header-phone/5.png);
+    }
+    .children-list li:nth-child(6) .figure {
+        background-repeat: no-repeat;
+        background-image: url(./img/header-phone/6.jpg);
+    }
+        .children-list li:nth-child(n + 2)::before {
+            position: absolute;
+            left: 0;
+            top: 35px;
+            z-index: 1;
+            width: 1px;
+            height: 100px;
+            content: "";
+            background-color: #e0e0e0;
+        }
+        .children-list li:nth-child(-n + 3)::after {
+            position: absolute;
+            top: 0px;
+            left: 69px;
+            z-index: 1;
+            width: 64px;
+            height: 18px;
+            padding: 1px 0;
+            border: 1px solid #ff6700;
+            content: "新品";
+            color: #ff6700;
+        }
+        .children-list li:nth-child(4)::after {
+            position: absolute;
+            top: 0px;
+            left: 69px;
+            z-index: 1;
+            width: 64px;
+            height: 18px;
+            padding: 1px 0;
+            border: 1px solid #ff6700;
+            content: "热卖";
+            color: #ff6700;
+        }
+    .children-list .figure {
+        width: 160px;
+        height: 110px;
+        margin: 0 auto 16px;;
+        background-position: center;
+        background-size: cover;
+    }
+    .children-list .title {
+        margin: 0;
+        line-height: 20px;
+    }
+    .children-list .price {
+        margin: 0;
+        line-height: 20px;
+        color: #ff6700;
+    }
+/*home主屏部分（轮播图）*/
+.home-container {
+    position: relative;
+}
+.home {
+    position: relative;
+    margin-bottom: 26px;
+}
+.home-slider {
+    z-index: -1;
+    position: relative;
+    height: 460px;
+    overflow: hidden;
+}
+.slider-view {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    height: 460px;
+}
+.slider-view img {
+    width: 1226px;
+    height: 460px;
+}
