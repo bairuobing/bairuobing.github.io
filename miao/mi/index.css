@@ -2,7 +2,7 @@
 * @Author: BaiRuobing
 * @Date:   2018-05-28 17:19:32
 * @Last Modified by:   Win
-* @Last Modified time: 2018-06-02 21:18:07
+* @Last Modified time: 2018-06-03 21:24:50
 */
 body {
     --n: calc(n);
@@ -59,6 +59,9 @@ button, input, select, textarea {
 }
 .topbar-cart {
     position: relative;
+}
+.topbar-cart a {
+    position: relative;
     background: #424242;
     float: right;
     margin-left: 15px;
@@ -77,11 +80,11 @@ button, input, select, textarea {
     position: absolute;
     top: 40px;
     right: 0;
-    z-index: -100;
     width: 316px;
     height: 0;
+    overflow: hidden;
     box-shadow: 0 2px 10px rgba(0,0,0,0.15);
-    transition: all .3s .2s;
+    transition: all .3s;
 }
 .topbar-cart:hover {
     background: #fff;
@@ -91,6 +94,7 @@ button, input, select, textarea {
 .topbar-cart:hover i,
 .topbar-cart:hover span {
     color: #ff6700;
+    background-color: #fff;
 }
 .topbar-cart:hover .cart-menu {
     z-index: 50;
@@ -202,9 +206,16 @@ button, input, select, textarea {
     height: 50px;
 
 }
-.search-form:hover input {
+.search-form input:hover,
+.search-form input:hover~input {
     border: 1px solid #757575;
 }
+.search-form input:focus,
+.search-form input:focus~input {
+    border: 1px solid #ff6700;
+}
+
+
     .search-text {
         z-index: 1;
         box-sizing: content-box;
@@ -264,6 +275,7 @@ button, input, select, textarea {
     }
 /*header-nav的菜单列表*/
 .header-nav-manu {
+    z-index: 100;
     position: absolute;
     top: 100px;
     left: 0;
@@ -384,18 +396,163 @@ button, input, select, textarea {
     margin-bottom: 26px;
 }
 .home-slider {
-    z-index: -1;
     position: relative;
     height: 460px;
-    overflow: hidden;
+    xoverflow: hidden;
 }
 .slider-view {
-    width: 100%;
-    overflow: hidden;
     position: relative;
+    width: 100%;
+    xoverflow: hidden;
     height: 460px;
 }
-.slider-view img {
+.slider-view a {
+    position: absolute;
+    display: block;
+}
+.slider-view a .slider-image {
     width: 1226px;
     height: 460px;
 }
+.slider-view a:nth-child(1) {
+    animation: loop1 24s linear infinite;
+    transition: all 1s linear;
+}
+.slider-view a:nth-child(2) {
+    animation: loop2 24s linear infinite;
+    transition: all 1s linear;
+}
+.slider-view a:nth-child(3) {
+    animation: loop3 24s linear infinite;
+    transition: all 1s linear;
+}
+.slider-view a:nth-child(4) {
+    animation: loop4 24s linear infinite;
+    transition: all 1s linear;
+}
+.slider-view a:nth-child(5) {
+    animation: loop5 24s linear infinite;
+    transition: all 1s linear;
+}
+.slider-view a:nth-child(6) {
+    animation: loop6 24s linear infinite;
+    transition: all 1s linear;
+}
+.slider-view a:hover {
+    
+}
+@keyframes loop1 {
+    0% {
+        opacity: 100;
+    }
+    13% {
+        opacity: 100;
+    }
+    17% {
+        opacity: 0;
+    }
+    97% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 100;
+    }
+}
+@keyframes loop2 {
+    0% {
+        opacity: 0;
+    }
+    13% {
+        opacity: 0;
+    }
+    17% {
+        opacity: 100;
+    }
+    30% {
+        opacity: 100;
+    }
+    34% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+@keyframes loop3 {
+    0% {
+        opacity: 0;
+    }
+    30% {
+        opacity: 0;
+    }
+    34% {
+        opacity: 100;
+    }
+    47% {
+        opacity: 100;
+    }
+    51% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+@keyframes loop4 {
+    0% {
+        opacity: 0;
+    }
+    47% {
+        opacity: 0;
+    }
+    51% {
+        opacity: 100;
+    }
+    64% {
+        opacity: 100;
+    }
+    68% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+@keyframes loop5 {
+    0% {
+        opacity: 0;
+    }
+    64% {
+        opacity: 0;
+    }
+    68% {
+        opacity: 100;
+    }
+    81% {
+        opacity: 100;
+    }
+    85% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+@keyframes loop6 {
+    0% {
+        opacity: 0;
+    }
+    81% {
+        opacity: 0;
+    }
+    85% {
+        opacity: 100;
+    }
+    97% {
+        opacity: 100;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
