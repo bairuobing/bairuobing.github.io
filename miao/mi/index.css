@@ -1,8 +1,8 @@
 /*
 * @Author: BaiRuobing
 * @Date:   2018-05-28 17:19:32
-* @Last Modified by:   Win
-* @Last Modified time: 2018-06-03 21:24:50
+* @Last Modified by:   BaiRuobing
+* @Last Modified time: 2018-06-04 22:32:01
 */
 body {
     --n: calc(n);
@@ -229,7 +229,7 @@ button, input, select, textarea {
         font-size: 14px;
         line-height: 48px;
         outline: 0;
-        transition: all .3s .2s;
+        transition: all .3s;
     }
         .search-hot-word {
         z-index: 2;
@@ -266,7 +266,7 @@ button, input, select, textarea {
         background: #fff;
         color: #616161;
         outline: 0;
-        transition: all .3s .2s;
+        transition: all .3s;
     }
     .search-btn:hover {
         color: #fff;
@@ -395,6 +395,7 @@ button, input, select, textarea {
     position: relative;
     margin-bottom: 26px;
 }
+/*---------------------------------自动轮播图start---------------------------------*/
 .home-slider {
     position: relative;
     height: 460px;
@@ -415,38 +416,29 @@ button, input, select, textarea {
     height: 460px;
 }
 .slider-view a:nth-child(1) {
-    animation: loop1 24s linear infinite;
-    transition: all 1s linear;
+    animation: loop1 24s infinite;
 }
 .slider-view a:nth-child(2) {
-    animation: loop2 24s linear infinite;
-    transition: all 1s linear;
+    animation: loop2 24s infinite;
 }
 .slider-view a:nth-child(3) {
-    animation: loop3 24s linear infinite;
-    transition: all 1s linear;
+    animation: loop3 24s infinite;
 }
 .slider-view a:nth-child(4) {
-    animation: loop4 24s linear infinite;
-    transition: all 1s linear;
+    animation: loop4 24s infinite;
 }
 .slider-view a:nth-child(5) {
-    animation: loop5 24s linear infinite;
-    transition: all 1s linear;
+    animation: loop5 24s infinite;
 }
 .slider-view a:nth-child(6) {
-    animation: loop6 24s linear infinite;
-    transition: all 1s linear;
-}
-.slider-view a:hover {
-    
+    animation: loop6 24s infinite;
 }
 @keyframes loop1 {
     0% {
-        opacity: 100;
+        opacity: 1;
     }
     13% {
-        opacity: 100;
+        opacity: 1;
     }
     17% {
         opacity: 0;
@@ -455,7 +447,7 @@ button, input, select, textarea {
         opacity: 0;
     }
     100% {
-        opacity: 100;
+        opacity: 1;
     }
 }
 @keyframes loop2 {
@@ -466,10 +458,10 @@ button, input, select, textarea {
         opacity: 0;
     }
     17% {
-        opacity: 100;
+        opacity: 1;
     }
     30% {
-        opacity: 100;
+        opacity: 1;
     }
     34% {
         opacity: 0;
@@ -486,10 +478,10 @@ button, input, select, textarea {
         opacity: 0;
     }
     34% {
-        opacity: 100;
+        opacity: 1;
     }
     47% {
-        opacity: 100;
+        opacity: 1;
     }
     51% {
         opacity: 0;
@@ -506,10 +498,10 @@ button, input, select, textarea {
         opacity: 0;
     }
     51% {
-        opacity: 100;
+        opacity: 1;
     }
     64% {
-        opacity: 100;
+        opacity: 1;
     }
     68% {
         opacity: 0;
@@ -526,10 +518,10 @@ button, input, select, textarea {
         opacity: 0;
     }
     68% {
-        opacity: 100;
+        opacity: 1;
     }
     81% {
-        opacity: 100;
+        opacity: 1;
     }
     85% {
         opacity: 0;
@@ -546,13 +538,99 @@ button, input, select, textarea {
         opacity: 0;
     }
     85% {
-        opacity: 100;
+        opacity: 1;
     }
     97% {
-        opacity: 100;
+        opacity: 1;
     }
     100% {
         opacity: 0;
     }
 }
+.slider-controls a {
+    position: absolute;
+    top: 50%;
+    z-index: 999;
+    width: 41px;
+    height: 69px;
+    margin-top: -35px;
+    outline: 0;
+    cursor: pointer;
+}
+.slider-controls .prev {
+    float: left;
+    left: 234px;
+    background: url(//i1.mifile.cn/f/i/2014/cn/icon/icon-slides.png) no-repeat -84px 50%;
+}
+.slider-controls .prev:hover {
+    background-position: 0 50%;
+}
+.slider-controls .next:hover {
+    background-position: -42px 50%;
+}
+.slider-controls .next {
+    float: right;
+    right: 0;
+    background: url(//i1.mifile.cn/f/i/2014/cn/icon/icon-slides.png) no-repeat -125px 50%;  
+}
+/*---------------------------------自动轮播图end---------------------------------*/
 
+/*手动轮播图*/
+.home-slider-manual {
+    position: relative;
+    height: 460px;
+    xoverflow: hidden;
+}
+.slider-view-manual {
+    position: relative;
+    width: 100%;
+    xoverflow: hidden;
+    height: 460px;
+}
+.slider-view-manual input {
+    display: none;
+}
+.slider-view-manual div a {
+    position: absolute;
+    display: block;
+}
+.slider-view-manual div a .slider-image {
+    opacity: 0;
+    width: 1226px;
+    height: 460px;
+    transition: all 1s;
+}
+
+.slider-view-manual div label {
+    display: none;
+    position: absolute;
+    top: 50%;
+    z-index: 999;
+    width: 41px;
+    height: 69px;
+    margin-top: -35px;
+    outline: 0;
+    cursor: pointer;
+}
+.slider-view-manual div .prev {
+    float: left;
+    left: 234px;
+    background: url(//i1.mifile.cn/f/i/2014/cn/icon/icon-slides.png) no-repeat -84px 50%;
+}
+.slider-view-manual div .prev:hover {
+    background-position: 0 50%;
+}
+.slider-view-manual div .next:hover {
+    background-position: -42px 50%;
+}
+.slider-view-manual div .next {
+    float: right;
+    right: 0;
+    background: url(//i1.mifile.cn/f/i/2014/cn/icon/icon-slides.png) no-repeat -125px 50%;
+}
+.slider-view-manual input:checked+div .slider-image{
+    opacity: 1;
+}
+.slider-view-manual input:checked+div label{
+    display: block;
+}
