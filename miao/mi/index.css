@@ -2,7 +2,7 @@
 * @Author: BaiRuobing
 * @Date:   2018-05-28 17:19:32
 * @Last Modified by:   BaiRuobing
-* @Last Modified time: 2018-06-06 22:47:32
+* @Last Modified time: 2018-06-06 22:57:21
 */
 @font-face {
   font-family: 'iconfont';  /* project id 697244 */
@@ -335,27 +335,27 @@ img {
     }
     .children-list li:nth-child(1) .figure {
         background-repeat: no-repeat;
-        background-image: url(./img/header-phone/1.png);
+        background-image: url(https://i1.mifile.cn/f/i/g/2015/cn-index/pc-320-220-mi8.png);
     }
     .children-list li:nth-child(2) .figure {
         background-repeat: no-repeat;
-        background-image: url(./img/header-phone/2.png);
+        background-image: url(https://i1.mifile.cn/f/i/g/2015/cn-index/pc-320-220-mi8se.png);
     }
     .children-list li:nth-child(3) .figure {
         background-repeat: no-repeat;
-        background-image: url(./img/header-phone/3.jpg);
+        background-image: url(https://i1.mifile.cn/f/i/g/2015/cn-index/mix2s320-220white.png);
     }
     .children-list li:nth-child(4) .figure {
         background-repeat: no-repeat;
-        background-image: url(./img/header-phone/4.png);
+        background-image: url(https://i1.mifile.cn/f/i/g/2015/cn-index/mix2320-220.png);
     }
     .children-list li:nth-child(5) .figure {
         background-repeat: no-repeat;
-        background-image: url(./img/header-phone/5.png);
+        background-image: url(https://i1.mifile.cn/f/i/g/2015/cn-index/32022012085.jpg);
     }
     .children-list li:nth-child(6) .figure {
         background-repeat: no-repeat;
-        background-image: url(./img/header-phone/6.jpg);
+        background-image: url(https://i1.mifile.cn/f/i/g/2015/cn-index/max2_toubu.png);
     }
         .children-list li:nth-child(n + 2)::before {
             position: absolute;
