@@ -1,0 +1,95 @@
+/*
+* @Author: BaiRuobing
+* @Date:   2018-06-12 19:44:05
+* @Last Modified by:   BaiRuobing
+* @Last Modified time: 2018-06-13 16:13:36
+*/
+html {
+    font-family: 微软雅黑, Roboto, Verdana, sans-serif;
+    color: #3d464d;
+    text-align: center;
+}
+body {
+    min-width: 700px;
+}
+hr {
+    border: none;
+    height: 1px;
+    margin-top: 2rem;
+    margin-bottom: 1.5rem;
+    background-color: #c0c8c9;
+    background-image: -webkit-linear-gradient(0deg, #fff, #c0c8c9, #fff);
+}
+.container {
+    margin-left: auto;
+    margin-right: auto;
+    width: 40%;
+}
+.header {
+    min-width: 540px;
+    box-sizing: border-box;
+    width: 100%;
+    height: 195px;
+    padding: 3rem 1.5rem 1.5rem 1.5rem;
+}
+h1 {
+    margin: 0;
+    margin-bottom: 1.5rem;
+    font-size: 6rem;
+    color: #f35626;
+    background-image: -webkit-linear-gradient(92deg,#f35626,#feab3a);
+    -webkit-background-clip: text;
+    color: transparent;
+    animation: hue 30s infinite linear;
+}
+@keyframes hue {
+  from {
+    -webkit-filter: hue-rotate(0deg);
+  }
+
+  to {
+    -webkit-filter: hue-rotate(-360deg);
+  }
+}
+
+.note{
+    color: #7b8993;
+    font-weight: 400;
+    font-size: 1.5rem;
+    line-height: 1;
+}
+form {
+    margin-bottom: 1.5rem;
+    padding-top: 3.75rem;
+}
+form > select {
+    line-height: 1.375;
+    outline: none;
+    padding: .75rem;
+    margin: .375rem;
+    border: 1px solid #c0c8c9;
+    border-radius: 4px;
+    font: inherit;
+    color: inherit;
+}
+form > button {
+    outline: none;
+    padding: .75rem;
+    margin: .375rem;
+    background-color: transparent;
+    border-radius: 4px;
+    border: 2px solid #f35626;
+    line-height: 1.375;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    font-weight: 700;
+    font: inherit;
+    color: #f35626;
+    cursor: pointer;
+    -webkit-animation: hue 30s infinite linear;
+}
+p {
+    font-weight: 700;
+    color: #f35626;
+    -webkit-animation: hue 30s infinite linear;
+}
