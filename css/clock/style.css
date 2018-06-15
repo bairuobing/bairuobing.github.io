@@ -2,7 +2,7 @@
 * @Author: BaiRuobing
 * @Date:   2018-06-12 23:08:26
 * @Last Modified by:   BaiRuobing
-* @Last Modified time: 2018-06-14 21:58:04
+* @Last Modified time: 2018-06-15 10:03:27
 */
 * {
     box-sizing: border-box;
@@ -140,10 +140,10 @@ span:nth-child(12) {
 
 /*.hours-container {
     animation: rotate 43200s infinite linear;
-}
-.minutes-container {
-    animation: rotate 3600s infinite linear;
 }*/
+.minutes-container {
+    transition: transform .3s cubic-bezier(.4,2.08,.55,.44);
+}
 .seconds-container {
     transition: transform .3s cubic-bezier(.4,2.08,.55,.44);
 }
