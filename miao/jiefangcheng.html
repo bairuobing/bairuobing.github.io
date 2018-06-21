@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>解方程</title>
+</head>
+<body>
+
+</body>
+<script type="text/javascript">
+        confirm("请解形如aX^2 + bX + c = 0 的方程：");
+        var a = +prompt("a的值为： ");
+        var b = +prompt("b的值为： ");
+        var c = +prompt("c的值为： ");
+
+        var delta = b * b - 4 * a * c;
+
+        var x1;
+        var x2;
+
+        var x_real;
+        var x_virt;
+        if (delta === 0) {
+            x1 = (-b + Math.sqrt(delta)) / (2 * a);
+            console.log("方程有唯一解： " + x1);
+        }else if (delta > 0) {
+            x1 = (-b + Math.sqrt(delta)) / (2 * a);
+            x2 = (-b - Math.sqrt(delta)) / (2 * a);
+            console.log("方程x1解： " + x1);
+            console.log("方程x2解： " + x2);
+        }else {
+            x_real = -(b / (2 * a));
+            x_virt = Math.sqrt(-delta) / (2 * a);
+            console.log("方程复数解1： " + x_real + "+" + x_virt + "i");
+            console.log("方程复数解2： " + x_real + "-" + x_virt + "i");
+        }
+        confirm("一元二次方程计算完毕，接下来请解方程组，形如 : \n┌ ix + jy = k\n│\n└ mx + ny = s");
+
+        var i = +prompt("i的值为：");
+        var j = +prompt("j的值为：");
+        var k = +prompt("k的值为：");
+
+        var m = +prompt("m的值为：");
+        var n = +prompt("n的值为：");
+        var s = +prompt("s的值为：");
+
+        if ((i / m) !== (j / n)) {
+            x1 = (k * n - j * s) / (i * n - j * m);
+            x2 = (k * m - i * s) / (j * m - i * n);
+            console.log("该方程组有解： x = " + x1);
+            console.log("该方程组有解： y = " + x2);
+        }else if ((i / m) === (j / n) && (j / n) === (k / s)) {
+            console.log("该方程组有无数解~");
+        }else {
+            console.log("该方程组无解!");
+        }
+
+    </script>
+</html>
