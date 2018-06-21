@@ -2,8 +2,11 @@
 * @Author: BaiRuobing
 * @Date:   2018-06-12 23:08:26
 * @Last Modified by:   BaiRuobing
-* @Last Modified time: 2018-06-15 10:03:27
+* @Last Modified time: 2018-06-15 15:57:04
 */
+body {
+    background-color: rgba(62,63,62);
+}
 * {
     box-sizing: border-box;
 }
