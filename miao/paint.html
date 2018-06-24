@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>画图</title>
+  <style>
+    canvas {
+      border: 2px solid #f0f;
+      display: block;
+      margin: auto;
+    }
+  </style>
+</head>
+<body>
+  <canvas width="400" height="300"></canvas>
+</body>
+<script>
+  var cvs = document.querySelector('canvas')
+  var ctx = cvs.getContext('2d')
+
+  function dot(x, y, color='black') {
+      ctx.fillStyle = color
+      ctx.fillRect(x, y, 1, 1)
+  }
+  //   ------------------------------------------------------------
+  // 直线
+  for (var i = 0; i <= 400; i++) {
+      dot(i, 10, 'black')
+  }
+  //隔一个点
+  for (var i = 0; i <= 400; i = i + 2) {
+      dot(i, 20, 'black')
+  }
+  //隔俩画俩
+  for (var i = 0; i <= 400; i = i + 3) {
+      dot(i, 30, 'black')
+      dot(i += 1, 30, 'black')
+  }
+  // 隔俩画仨
+  for (var i = 0; i <= 400; i = i + 3) {
+      dot(i, 40, 'black')
+      dot(i += 1, 40, 'black')
+      dot(i += 1, 40, 'black')
+  }
+
+  for (var i = 0; i <= 400; i++) {
+      dot(i, i, 'black')
+  }
+
+  for (var i = 0, j = 0; i <= 400,j <= 300; i++,j = j + 3 / 4) {
+      dot(i, j, 'black')
+  }
+
+  //纯色正方形
+  for (var i = 150; i <= 200; i++) {
+      for (var j = 150; j <= 200; j++) {
+          dot(i, j, 'black')
+      }
+  }
+  // 渐变色正方形
+  for (var i = 201, x = 255; i <= 251; i++) {
+      for (var j = 201, y = 0; j <= 251; j++) {
+          dot(j, i, 'rgb(255,' + x + ',' + y + ')')
+          y += 255 / 50
+      }
+      x -= 255 / 50
+  }
+  // 圆
+  for(var i = 50;i <= 150; i++) {
+      var j1 = 100 + Math.sqrt(50**2 - (i - 100)**2)
+      var j2 = 100 - Math.sqrt(50**2 - (i - 100)**2)
+      dot(i,j1,'black')
+      dot(i,j2,'black')
+      dot(j1,i,'black')
+      dot(j2,i,'black')
+  }
+</script>
+<script>
+  // YOUR CODE GOES HERE
+</script>
+</html>

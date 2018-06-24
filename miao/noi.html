@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>noi</title>
+</head>
+<script id="ch0105/01">
+    var number = Number(prompt("Please input the number of students: "))
+    var sum = 0
+    var result = 0
+    for (var i = 1; i <= number; i++) {
+        sum += Number(prompt("And please input the student's age of No." + i))
+    }
+    result = sum / number
+    console.log("The average of all students is " + result.toFixed(2) + ".")
+</script>
+<script id="ch0105/02">
+    var money = 0
+    var result
+    for (var i = 1; i <= 12; i++) {
+        money += Number(prompt("请输入 " + i + " 月结余(不大于1,000,000)"))  
+    }
+    result = money / 12
+    console.log("$" + result.toFixed(2))
+</script>
+<script id="ch0105/03">
+
+</script>
+<script id="ch0105/04">
+
+</script>
+<script id="ch0105/05">
+    var n = Number(prompt("Please input the number of students: (1 <= n < 100)"))
+    var max = 0
+    for (var i = 1; i <= n; i++) {
+        var tmp = Number(prompt("No. " + i + " score"))  
+        if (tmp > max) {
+            max = tmp
+        }
+    }
+    console.log(max)
+</script>
+<script id="ch0105/06">
+    var n = Number(prompt("(1 <= n <= 1000)"))
+    var max = 0
+    var min = Infinity
+    var result
+    for(var i = 1; i <= n; i++){
+        var tmp = Number(prompt("please input number No."+ i + ": "))
+        if (tmp > max) {
+            max = tmp
+        }
+        if (tmp < min) {
+            min = tmp
+        }
+    }
+    result = max - min
+</script>
+<script id="ch0105/07">
+    var n = Number(prompt("Please input the number of days"))
+    var medal
+    var first = 0
+    var second = 0
+    var third = 0
+    for(var i = 1; i <= n; i++) {
+        medal = prompt("Please input the status of No." + i + " like this(123)")
+        first += Number(medal[0])
+        second += Number(medal[1])
+        third += Number(medal[2])
+    }
+    console.log(first,second,third,first+second+third)
+</script>
+<script id="ch0105/08">
+    var n = Number(prompt("please input the number of polygon: "))
+    var per = 0
+    var result = 0
+    for (var i = 1; i <= n - 1; i++) {
+        per += Number(prompt("And input No. " + i + " angel: "))
+    }
+    result = (n - 2) * 180 - per
+    console.log(result + "°")
+</script>
+<script id="ch0105/09">
+    var min = Number(prompt("Please input the least number: "))
+    var max = Number(prompt("Please input the largest number: "))
+    var sum = 0
+    for (var i = min; i <= max; i++) {
+        if (i % 2 !== 0) {
+            sum += i
+        }
+    }
+    console.log(sum)
+</script>
+<script id="ch0105/10">
+    var min = Number(prompt("Please input the least number: "))
+    var max = Number(prompt("Please input the largest number: "))
+    var sum = 0
+    for (var i = min; i <= max; i++) {
+        if (i % 17 === 0) {
+            sum += i
+        }
+    }
+    console.log(sum)
+</script>
+<script id="ch0105/11">
+    var n = Number(prompt("Please input the number of alpabet"))
+    var num_one = 0
+    var num_five = 0
+    var num_ten = 0
+    for (var i = 1; i <= n; i++) {
+        var tmp = Number(prompt("No." + i + ": "))
+        switch (tmp) {
+        case 1:
+            num_one++
+            break
+        case 5:
+            num_five++
+            break
+        case 10:
+            num_ten++
+            break
+        default:
+            break
+        }
+    }
+    console.log(num_one, num_five, num_ten)
+</script>
+<script id="ch0105/12">
+    var n = Number(prompt("Please input N: "))
+    var m = Number(prompt("Please input m: "))
+    var result = 0
+    for (var i = 1; i <= n; i++) {
+        var tmp = Number(prompt("Every number: "))
+        if (tmp === m) {
+            result++
+        }
+    }
+    console.log(result)
+</script>
+<script id="ch0105/13">
+    var a = Number(prompt("Please input a: "))
+    var n = Number(prompt("Please input n: "))
+    var result = 1
+    for (var i = 1; i <= n; i++) {
+        result = a * result
+    }
+    console.log(result)
+</script>
+<script id="ch0105/14">
+    var x = Number(prompt("Please input x: "))
+    var n = Number(prompt("Please input n: "))
+    for(var i = 1; i <= n; i++) {
+        x = x * 1.001
+    }
+    console.log(x.toFixed(4))
+</script>
+<script id="ch0105/15">
+    var r = Number(prompt("Please input r: "))
+    var m = Number(prompt("Please input m: "))
+    var y = Number(prompt("Please input y: "))
+    for (var i = 1; i <= y; i++) {
+        m = m * (0.01 * r + 1)
+    }
+    console.log(Math.floor(m))
+</script>
+<script id="ch0105/16">
+    var n = Number(prompt("Programmer's salary of year is: "))
+    var k = Number(prompt("The rate of improvment is: %"))
+    var year = 1
+    var money = n
+    var price = 200
+    while (money < price) {
+        year++
+        money = money + n
+        price = price * (0.01 * k + 1)
+    }
+
+    if (year <= 20) {
+        console.log(year)
+    } else {
+        console.log("Impossible")
+    }
+</script>
+<script id="ch0105/17">
+    var k = Number(prompt("Fibb's K(1 <= k <= 46) : "))
+    var i = 1
+    var j = 1
+    if (k === 1 || k === 2) {
+        console.log(i)
+    } else {
+        while(k-2) {
+            var tmp = j
+            j = i + j
+            i = tmp
+            k--
+        }
+    }
+    console.log(j)
+</script>
+<script id="ch0105/18">
+    var n = Number(prompt("N: "))
+    var all = Number(prompt("origin_All: "))
+    var worked = Number(prompt("origin_Worked: "))
+    var rate = worked / all
+    for (var i = n - 1; i > 0; i--) {
+        all = Number(prompt("New_All: "))
+        worked = Number(prompt("New_Worked: "))
+        var tmp = worked / all
+        if ((tmp > rate) && ((tmp - rate) > 0.05)) {
+            console.log("better")
+        } else if ((tmp < rate) && ((rate - tmp) > 0.05)) {
+            console.log("worse")
+        } else {
+            console.log("same")
+        }
+    }
+</script>
+<script id="ch0105/19">
+    var n = Number(prompt("Please input the number of roofs: "))
+    var x
+    var y
+    var num
+    var sum
+    for (var i = 1; i <= n; i++) {
+        x = Number(prompt("x: (m)"))
+        y = Number(prompt("y: (m)"))
+        num = Number(prompt("The number of people: "))
+        sum = 2 * Math.sqrt(x * x + y * y) / 50 + (1.5 * num)
+    }
+    console.log(Math.ceil(sum))
+</script>
+<script id="ch0105/20">
+    var h = Number(prompt("Please input the height of ball: "))
+    var fall = h
+    var jump
+    var sum = h
+    for (var i = 2; i <= 10; i++) {
+        jump = fall / 2
+        fall = fall / 2
+        sum += jump + fall
+    }
+    console.log(sum)
+    console.log(jump / 2)
+</script>
+
+<script id="ch0104/01">
+
+</script>
+<script id="ch0104/02">
+
+</script>
+<script id="ch0104/03">
+
+</script>
+<script id="ch0104/04">
+
+</script>
+<script id="ch0104/05">
+
+</script>
+<script id="ch0104/06">
+
+</script>
+<script id="ch0104/07">
+
+</script>
+<script id="ch0104/08">
+
+</script>
+<script id="ch0104/09">
+
+</script>
+<script id="ch0104/10">
+
+</script>
+<script id="ch0104/11">
+
+</script>
+<script id="ch0104/12">
+
+</script>
+<script id="ch0104/13">
+
+</script>
+<script id="ch0104/14">
+
+</script>
+<script id="ch0104/15">
+
+</script>
+<script id="ch0104/16">
+
+</script>
+<script id="ch0104/17">
+
+</script>
+<script id="ch0104/18">
+
+</script>
+<script id="ch0104/19">
+
+</script>
+<script id="ch0104/20">
+
+</script>
+<body>
+    
+</body>
+</html>

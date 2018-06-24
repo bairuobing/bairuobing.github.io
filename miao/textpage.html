@@ -5,21 +5,26 @@
     <title>Document</title>
 </head>
 <script>
-    
-    var n = 101;
-    if (n < 10) {
-        alert('small');
-    } else {
-      if (n < 100) {
-          alert('medium');
-      }else {
-          alert('large');
-      }
+    debugger 
+    var n = Number(prompt("Programmer's salary of year is: "))
+    var k = Number(prompt("The rate of improvment is: %"))
+    var year = 0
+    var money = 0
+    var price = 200
+    while (money < price) {
+        year++
+        money = n * year
+        price = price * (0.01 * k + 1)
     }
 
-console.log('Done');
+    if (year <= 20) {
+        console.log(year)
+    } else {
+        console.log("Impossible")
+    }
+
 </script>
 <body>
-    
+    <p>牛逼</p>
 </body>
 </html>
