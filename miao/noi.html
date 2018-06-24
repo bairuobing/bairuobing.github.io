@@ -524,7 +524,17 @@ console.log(result.toFixed(3))
     }
 </script>
 <script id="ch0104/20">
-
+    var a = +prompt('a: ')
+    var b = +prompt('b: ')
+    var c = +prompt('c: ')
+    var delta = b * b - 4 * a * c
+    if (delta === 0) {
+    console.log('x1=x2=' + (-b / 2 / a).toFixed(5))
+    } else if (delta > 0) {
+    console.log('x1=' + ((-b + Math.sqrt(delta)) / 2 / a).toFixed(5) + ';x2=' + ((-b - Math.sqrt(delta)) / 2 / a).toFixed(5))
+    } else { 
+    console.log('x1=' + (-b / 2 / a).toFixed(5) + '+' + (Math.sqrt(-delta) / 2 / a).toFixed(5) + 'i;x2=' + (-b / 2 / a).toFixed(5) + '-' + (Math.sqrt(-delta) / 2 / a).toFixed(5) + 'i')
+    }
 </script>
 <script id="ch0104/21">
     var n = prompt("Please input the number of all apples: ")
