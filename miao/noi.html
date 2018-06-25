@@ -4,6 +4,181 @@
     <meta charset="UTF-8">
     <title>noi</title>
 </head>
+<script id="sort" sample-input="4 1 7" sample-output="1 4 7" comment="输入三个数，把此三个数按升序输出">
+    var a = Number(prompt('a: '))
+    var b = Number(prompt('b: '))
+    var c = Number(prompt('c: '))
+
+    if (a > b) {
+        var tmp = a
+        a = b
+        b = tmp
+    }
+    if (b > c) {
+        var tmp = b
+        b = c
+        c = tmp
+    }
+    if (a > b) {
+        var tmp = a
+        a = b
+        b = tmp
+    }
+    console.log(a,b,c)
+</script>
+<script id="narcissistic " sample-input="153" sample-output="YES" comment="判断一个数是否为水仙花数">
+    var n = Number(prompt('n: '))
+    var tmp = n
+    var bit = 0
+    var sum = 0
+    while (tmp > 1) {
+        tmp /= 10
+        bit++
+    }
+    tmp = n
+    while (tmp > 0) {
+        sum += (tmp % 10) ** bit
+        tmp = parseInt(tmp / 10)
+    }
+    if (sum === n) {
+        console.log('YES')
+    } else {
+        console.log('NO')
+    }
+</script>
+<script id="narcissistics" sample-input="" sample-output="" comment="找出100到10000以内所有的水仙花数">
+    for (var n = 100; n <= 100000; n++) {
+        var tmp = n
+        var bit = 0
+        var sum = 0
+        while (tmp > 1) {
+            tmp /= 10
+            bit++
+        }
+        tmp = n
+        while (tmp > 0) {
+            sum += (tmp % 10) ** bit
+            tmp = parseInt(tmp / 10)
+        }
+        if (sum === n) {
+            console.log(n)
+        }
+    }
+</script>
+<script id="palindrom" sample-input="12321" sample-output="YES" comment="判断一个非负整数是否为回文数字">
+    var n = Number(prompt("n= "))
+    var tmp = n
+    var m = 0
+    while (tmp > 0) {
+        m = m * 10 + tmp % 10
+        tmp = parseInt(tmp / 10)
+    }
+    if (m === n) {
+        console.log('YES')
+    } else {
+        console.log('NO')
+    }
+</script>
+<script id="weekday" sample-input="2018 6" sample-output="5" comment="输入年份与月份，给出该年该月的第一天是星期几">
+
+</script>
+<script id="complete-number" sample-input="6" sample-output="YES" comment="判断一个数是否为完全数">
+    var n = Number(prompt("n= "))
+    var sum = 0
+    for (var i = 1; i < n; i++) {
+        if (n % i === 0) {
+            sum += i
+        }
+    }
+    if (sum === n) {
+        console.log('YES')
+    } else {
+        console.log('NO')
+    }
+</script>
+<script id="complete-numbers" sample-input="" sample-output="" comment="输出10000以内所有的完全数">
+    for (var n = 1; n <= 10000; n++) {
+        var sum = 0
+        for (var i = 1; i < n; i++) {
+            if (n % i === 0) {
+                sum += i
+            }
+        }
+        if (sum === n) {
+            console.log(n)
+        }
+    }
+</script>
+<script id="prime" sample-input="7" sample-output="YES" comment="判断一个数是否为素数">
+    var n = Number(prompt("n= "))
+    var flag = true
+    for (var i = 2; i <= Math.sqrt(n); i++) {
+        if (n % i === 0) {
+            var flag = false
+            break
+        }
+    }
+    if (flag) {
+        console.log('YES')
+    } else {
+        console.log('NO')
+    }
+</script>
+<script id="primes" sample-input="" sample-output="" comment="输出100以内所有的素数">
+    for (var n = 2; n <= 100; n++) {
+        var flag = true
+        for (var i = 2; i <= Math.sqrt(n); i++) {
+            if (n % i === 0) {
+                var flag = false
+                break
+            }
+        }
+        if (flag) {
+            console.log(n)
+        }
+    }
+</script>
+<script id="itob" sample-input="123" sample-output="123" comment="数字转换成字符串">
+    var n = Number(prompt("n= "))
+    var tmp = n
+    var m = 0
+    var str = ''
+    while (tmp > 0) {
+        m = m * 10 + tmp % 10
+        tmp = parseInt(tmp / 10)
+    }
+
+    while (m > 0) {
+        str += m % 10
+        m = parseInt(m / 10)
+    }
+    console.log(str)
+</script>
+<script id="lcf&lcm" sample-input="12 9" sample-output="36 3" comment="给定两个数，求它们的最小公倍数和最大公约数">
+    var a = Number(prompt("a: "))
+    var b = Number(prompt("b: "))
+    var s = a * b
+    while (a !== b) {
+        if (a > b) {
+            a -= b
+        } else {
+            b -= a
+        }
+    }
+    console.log(s / a,a)
+</script>
+<script id="7" sample-input="" sample-output="" comment="敲7">
+
+</script>
+<script id="sqrt" sample-input="2" sample-output="1.414" comment="不使用Math.sqrt，求一个非负数的平方根，至少精确到小数点后3位">
+    var n = Number(prompt("n: "))
+    var x = n
+    while (Math.abs(x * x - n) > 0.00001) {
+        x = x - (x * x - n) / (2 * x)
+    }
+    console.log(x.toFixed(3))
+</script>
+
 <script id="ch0105/01">
     var number = Number(prompt("Please input the number of students: "))
     var sum = 0
@@ -245,6 +420,7 @@
     console.log(Math.ceil(sum))
 </script>
 <script id="ch0105/20">
+    // 等比数列
     var h = Number(prompt("Please input the height of ball: "))
     var fall = h
     var jump
@@ -507,20 +683,22 @@ console.log(result.toFixed(3))
     switch(operator) {
         case '+':
             console.log(x + y)
-        break
+            break
         case '-':
             console.log(x - y)
-        break
+            break
         case '*':
             console.log(x * y)
-        break
+            break
         case '/':
             if(y!==0){
                 console.log(x / y)
             }else{
                 console.log("Divided by zero!")
             }
-        break  
+            break
+        default:
+              console.log("Invalid operator!")
     }
 </script>
 <script id="ch0104/20">
@@ -677,8 +855,9 @@ console.log(result.toFixed(3))
         result *= 2
     }
     console.log(result)
+    // 还可以移位运算~
 </script>
 <body>
-    
+
 </body>
 </html>
