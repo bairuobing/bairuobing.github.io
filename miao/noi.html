@@ -14,8 +14,8 @@
         a = b
         b = tmp
     }
-    if (b > c) {
-        var tmp = b
+    if (b > c) 
+{        var tmp = b
         b = c
         c = tmp
     }
@@ -596,10 +596,7 @@ console.log(result.toFixed(3))
             cost += 5
         }
     }else {
-        var overweight = (n - 1000) / 500
-        if(overweight<500){
-            overweight = 1
-        }
+        var overweight = Math.round((n - 1000) / 500 + 0.5)
         cost += overweight * 4
         if(level==='y'||level==='Y'){
             cost += 5
