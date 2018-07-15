@@ -31,9 +31,15 @@ var bairuobing = {
     difference: function(array, ...values) {
         var res = []
         var map = {}
-        for (var i = 0; i < values.length; i++) {
-            if (!map[values[i]]) {
-                map[values[i]] = true
+        var val = values[0]
+        //合并剩余参数数组
+        for (var i = 1; i < values.length; i++) {
+            val = val.concat(values[i])
+        }
+        //遍历建图
+        for (var i = 0; i < val.length; i++) {
+            if (!map[val[i]]) {
+                map[val[i]] = true
             }
         }
         for (var i = 0; i < array.length; i++) {
