@@ -28,7 +28,7 @@ var bairuobing = {
         return res
     },
     //即创建一个新数组,这个数组中的值,为第一个数字（array 参数）排除了给定数组中的值
-    difference: function(array, values) {
+    difference: function(array, ...values) {
         var res = []
         var map = {}
         for (var i = 0; i < values.length; i++) {
