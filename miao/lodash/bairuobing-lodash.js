@@ -18,7 +18,7 @@ var bairuobing = {
         return res
     },
     //紧凑,创建一个数组,将所有无效值都去除
-    compack: function(array) {
+    compact: function(array) {
         var res = []
         for(var i = 0; i < array.length; i++) {
             if(array[i]) {
@@ -43,5 +43,5 @@ var bairuobing = {
         }
         return res
     },
-    
+
 }
