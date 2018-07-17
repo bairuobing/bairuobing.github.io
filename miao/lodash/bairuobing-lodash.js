@@ -94,8 +94,58 @@ var bairuobing = {
             return collection
         }
     },
-
-
-
+    //先JSON序列化,再反序列化看来实现深复制
+    cloneDeep: value => JSON.parse((JSON.stringify(value))),
+    //
+    filter: function(collection, test) {
+        var res = []
+        if(Array.isArray(collection)) {
+            for(var i = 0; i < collection.length; i++) {
+                if(test(collection[i])){
+                    res.push(collection[i])
+                }
+            }
+            return res
+        }
+        if(typeof collection === 'object') {
+            for(var item in collection) {
+                if(test(item,collection[item])){
+                    res.push(collection[item])
+                }
+            }
+            return res
+        }
+    },
+    //
+    map: function(collection, mapper) {
+        var res = []
+        if(Array.isArray(collection)) {
+            for(var i = 0; i < collection.length; i++) {
+                res.push(mapper(collection[i]))
+            }
+            return res
+        }
+        if(typeof collection === 'object') {
+            for(var item in collection) {
+                res.push(mapper(item,collection[item]))
+            }
+            return res
+        }
+    },
+    //
+    reduce: function(collection, reducer, initialValue) {
+        if(Array.isArray(collection)){
+            for(var i = 0; i < collection.length; i++) {
+                initialValue = reducer(initialValue, collection[i])
+            }
+            return initialValue
+        }
+        if(typeof collection === 'object') {
+            for(var item in collection) {
+                initialValue = reducer(initialValue, item, collection[item])
+            }
+            return initialValue
+        }
+    },
 }
 var __ = bairuobing
