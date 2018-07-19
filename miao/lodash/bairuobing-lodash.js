@@ -122,9 +122,6 @@ var bairuobing = {
             iteratee = this.identity
             return this.difference(array, ...args)
         }
-
-
-
     },
     drop: function(array, number = 1) {
         return array.slice(number, array.length)
@@ -225,9 +222,6 @@ var bairuobing = {
         if (typeof object !== 'object' || typeof source !== 'object') {
             return false
         }
-        for (var item in object) {
-            if (object[item] !== source[item])
-        }
 
     },
     matches: function(source) {
@@ -244,6 +238,4 @@ var bairuobing = {
             return true
         }
     },
-
 }
-var __ = bairuobing
