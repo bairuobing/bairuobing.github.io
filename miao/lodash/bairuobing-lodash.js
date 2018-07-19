@@ -95,14 +95,20 @@ var bairuobing = {
     },
     //iteratee标准情况为一个function, 也可以传一个 字符串 (需要 property())
     differenceBy: function(array, ...args) {
-        var iteratee //函数签名为参数,但由于剩余参数只能为参数列表最后一项,所以妥协并声明为函数内部变量,还需要深度展开函数
+        var iteratee //函数签名为参数,但由于剩余参数只能为参数列表最后一项,所以声明为函数内部变量,还需要深度展开函数
         //参数归一化
         if (typeof args[args.length - 1] === 'string') {
             iteratee = args.pop() //iteratee === 'x'
             var argues = []
             var res = []
             argues = this.flattenDeep(args)
-            argues.map()
+            for(var item of array) {
+                for(var index of args) {
+                    if(!(this.isMatch(item, index))) {
+                        res.push(item)
+                    }
+                }
+            }
             return res
         } else if (typeof args[args.length - 1] === 'function') {
             iteratee = args.pop()
@@ -222,7 +228,15 @@ var bairuobing = {
         if (typeof object !== 'object' || typeof source !== 'object') {
             return false
         }
-
+        for (var item in source) {
+            if (source[item] !== object[item]) {
+                if (!isMatch(object[item], source[item])) {
+                    return false
+                } else {
+                    return true
+                }
+            }
+        }
     },
     matches: function(source) {
         return function(obj) {
@@ -237,5 +251,32 @@ var bairuobing = {
             }
             return true
         }
+    },
+    matchesProperty: function(array) {
+        return this.matches(this.fromPairs(array))
+    },
+    /**
+     * [fromPairs description]
+     * @param  {[type]} Array [description]
+     * @return {[type]} Object [description]
+     */
+    fromPairs: function(pairs) {
+        var res = {}
+        for (var item of pairs) {
+            res[item[0]] = item[1]
+        }
+        return res
+    },
+    /**
+     * [toPairs description]
+     * @param  {[type]} Object [description]
+     * @return {[type]} Array [description]
+     */
+    toPairs: function(object) {
+        var res = []
+        for (var item in object) {
+            res.push([item, object[item]])
+        }
+        return res
     },
 }
