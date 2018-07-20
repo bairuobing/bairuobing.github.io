@@ -98,13 +98,13 @@ var bairuobing = {
         var iteratee //函数签名为参数,但由于剩余参数只能为参数列表最后一项,所以声明为函数内部变量,还需要深度展开函数
         //参数归一化
         if (typeof args[args.length - 1] === 'string') {
-            iteratee = args.pop() //iteratee === 'x'
+            var f = this.iteratee(args.pop()) //iteratee === 'x'
             var argues = []
             var res = []
             argues = this.flattenDeep(args)
             for(var item of array) {
-                for(var index of args) {
-                    if(!(this.isMatch(item, index))) {
+                for(var index of argues) {
+                    if(f(item) !== f(index)) {
                         res.push(item)
                     }
                 }
