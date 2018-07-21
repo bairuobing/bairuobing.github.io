@@ -102,9 +102,9 @@ var bairuobing = {
             var argues = []
             var res = []
             argues = this.flattenDeep(args)
-            for(var item of array) {
-                for(var index of argues) {
-                    if(f(item) !== f(index)) {
+            for (var item of array) {
+                for (var index of argues) {
+                    if (f(item) !== f(index)) {
                         res.push(item)
                     }
                 }
@@ -129,8 +129,25 @@ var bairuobing = {
             return this.difference(array, ...args)
         }
     },
+    //isEqual 已经考虑到多种情况,故在此不多做考虑
+    differenceWith: function(array, ...args) {
+        var comparator = this.iteratee(args.pop())
+        var argues = this.flattenDeep(args)
+        var res = []
+        for (var item of array) {
+            for (var index of argues) {
+                if (!comparator(item,index)) {
+                    res.push(item)
+                }
+            }
+        }
+        return res
+    },
     drop: function(array, number = 1) {
         return array.slice(number, array.length)
+    },
+    dropRight: function(array, number = 1) {
+        return array.slice(0, array.length - number)
     },
     //创建一个只接受一个参数的函数并返回,并且忽略掉其他参数
 
@@ -279,4 +296,79 @@ var bairuobing = {
         }
         return res
     },
+    isEqual: function(value, other) {
+        if (value === other) {
+            return true
+        }
+        if (value !== value && other !== other) {
+            return true
+        }
+        if ((Array.isArray(value)) && (Array.isArray(other))) {
+            if (value.length !== other.length) {
+                return false
+            }
+            for (var i = 0; i < value.length; i++) {
+                if (!isEqual(value[i], other[i])) {
+                    return false
+                }
+            }
+        }
+
+        if (typeof value === 'object' && typeof other === 'object') {
+            if (Array.isArray(value) || Array.isArray(other)) {
+                return false
+            }
+            var propName = []
+            for (var item in value) {
+                propName.push(item)
+            }
+            for (var item in other) {
+                propName.push(item)
+            }
+            propName = this.uniq(propName)
+            for (var i = 0; i < propName.length; i++) {
+                if (!isEqual(value[i], other[i])) {
+                    return false
+                }
+            }
+            return true
+        }
+    },
+    //用indexOf简化两层for循环
+    uniq: function(array) {
+        var res = []
+        for (var i = 0; i < array.length; i++) {
+            if (res.indexOf(array[i]) === -1) {
+                res.push(array[i])
+            }
+        }
+        return res
+    },
+    uniqBy: function(array, iteratee = this.identity) {
+        if (typeof iteratee === 'function') {
+            var func = this.iteratee(iteratee)
+            var model = []
+            var res = []
+            for (var i = 0; i < array.length; i++) {
+                if (model.indexOf(func(array[i])) === -1) {
+                    model.push(func(array[i]))
+                    res.push(array[i])
+                }
+            }
+            return res
+        }
+        if (typeof iteratee === 'string') {
+            var prop = this.iteratee(iteratee)
+            var model = []
+            var res = []
+            for (var item of array) {
+                if (model.indexOf(prop(item)) === -1) {
+                    model.push(prop(item))
+                    res.push(item)
+                }
+            }
+            return res
+        }
+    },
+
 }
