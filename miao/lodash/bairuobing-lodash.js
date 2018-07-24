@@ -136,7 +136,7 @@ var bairuobing = {
         var res = []
         for (var item of array) {
             for (var index of argues) {
-                if (!comparator(item,index)) {
+                if (!comparator(item, index)) {
                     res.push(item)
                 }
             }
@@ -147,10 +147,20 @@ var bairuobing = {
         return array.slice(number, array.length)
     },
     dropRight: function(array, number = 1) {
+        if (number >= array.length) {
+            number = array.length
+        }
         return array.slice(0, array.length - number)
     },
-    //创建一个只接受一个参数的函数并返回,并且忽略掉其他参数
+    fill(array, value, start = 0, end = array.length) {
+        for (var i = start; i < end; i++) {
+            array[i] = value
+        }
+        return array
+    },
+    findIndex(array, predicate = this.identity, fromIndex = 0) {
 
+    },
     //forEach(collection, [iteratee=_.identity])
     forEach: function(collection, func) {
         if (Array.isArray(collection)) {
@@ -370,5 +380,22 @@ var bairuobing = {
             return res
         }
     },
+    every: function(ary, test) {
+        for (var i = 0; i < ary.length; i++) {
+            if (!test(ary[i], i, ary)) {
+                return false
+            }
+        }
+        return true
+    },
+    some: function(ary, test) {
+        for (var i = 0; i < ary.length; i++) {
+            if (test(ary[i], i, ary)) {
+                return true
+            }
+        }
+        return false
+    },
+
 
 }
