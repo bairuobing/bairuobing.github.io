@@ -19,7 +19,7 @@ var bairuobing = {
         return function(obj) {
             for (var item in obj) {
                 if (source[item] !== obj[item]) {
-                    if (!isMatch(source[item], obj[item])) {
+                    if (!this.isMatch(source[item], obj[item])) {
                         return false
                     } else {
                         return true
@@ -43,7 +43,10 @@ var bairuobing = {
     toPairs: function(object) {
         var res = []
         for (var item in object) {
-            res.push([item, object[item]])
+            if (object.hasOwnProperty(item)) {
+                res.push([item, object[item]])
+            }
+
         }
         return res
     },
@@ -261,6 +264,7 @@ var bairuobing = {
     cloneDeep: value => JSON.parse((JSON.stringify(value))),
     //分两种情况,数组 和 对象
     filter: function(collection, test) {
+        test = this.iteratee(test)
         var res = []
         if (Array.isArray(collection)) {
             for (var i = 0; i < collection.length; i++) {
@@ -281,6 +285,7 @@ var bairuobing = {
     },
     //
     map: function(collection, mapper) {
+        mapper = this.iteratee(mapper)
         var res = []
         if (Array.isArray(collection)) {
             for (var i = 0; i < collection.length; i++) {
@@ -358,7 +363,7 @@ var bairuobing = {
                 return false
             }
             for (var i = 0; i < value.length; i++) {
-                if (!isEqual(value[i], other[i])) {
+                if (!this.isEqual(value[i], other[i])) {
                     return false
                 }
             }
@@ -377,7 +382,7 @@ var bairuobing = {
             }
             propName = this.uniq(propName)
             for (var i = 0; i < propName.length; i++) {
-                if (!isEqual(value[i], other[i])) {
+                if (!this.isEqual(value[i], other[i])) {
                     return false
                 }
             }
@@ -429,6 +434,7 @@ var bairuobing = {
         return true
     },
     some: function(ary, test) {
+        test = iteratee(test)
         for (var i = 0; i < ary.length; i++) {
             if (test(ary[i], i, ary)) {
                 return true
