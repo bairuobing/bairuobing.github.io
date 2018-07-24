@@ -15,6 +15,39 @@ var bairuobing = {
     property: function(propName) {
         return obj => obj[propName]
     },
+    matches: function(source) {
+        return function(obj) {
+            for (var item in obj) {
+                if (source[item] !== obj[item]) {
+                    if (!isMatch(source[item], obj[item])) {
+                        return false
+                    } else {
+                        return true
+                    }
+                }
+            }
+            return true
+        }
+    },
+    matchesProperty: function(array) {
+        return this.matches(this.fromPairs(array))
+    },
+
+    fromPairs: function(pairs) {
+        var res = {}
+        for (var item of pairs) {
+            res[item[0]] = item[1]
+        }
+        return res
+    },
+    toPairs: function(object) {
+        var res = []
+        for (var item in object) {
+            res.push([item, object[item]])
+        }
+        return res
+    },
+
     unary: function(func) {
         return function(value) {
             return func(value)
@@ -73,12 +106,6 @@ var bairuobing = {
         res = res.concat(val)
         return res
     },
-    /**
-     * 即创建一个新数组,这个数组中的值,为第一个数字（array 参数）排除了给定数组中的值
-     * @param  {[type]}    array  [description]
-     * @param  {...[type]} values [description]
-     * @return {[type]}           [description]
-     */
     difference: function(array, ...values) {
         var res = []
         var val = []
@@ -152,6 +179,22 @@ var bairuobing = {
         }
         return array.slice(0, array.length - number)
     },
+    dropRightWhile: function(array, predicate = this.identity) {
+        predicate = this.iteratee(predicate)
+        for (var i = array.length - 1; i >= 0; i--) {
+            if (!predicate(array[i])) {
+                return array.slice(0, i + 1)
+            }
+        }
+    },
+    dropWhile: function(array, predicate = this.identity) {
+        predicate = this.iteratee(predicate)
+        for (var i = array.length - 1; i >= 0; i--) {
+            if (!predicate(array[i])) {
+                return array.slice(i)
+            }
+        }
+    },
     fill(array, value, start = 0, end = array.length) {
         for (var i = start; i < end; i++) {
             array[i] = value
@@ -159,7 +202,45 @@ var bairuobing = {
         return array
     },
     findIndex(array, predicate = this.identity, fromIndex = 0) {
-
+        predicate = this.iteratee(predicate)
+        for (var i = fromIndex; i < array.length; i++) {
+            if (predicate(array[i])) {
+                return i
+            }
+        }
+        return -1
+    },
+    head: function(array) {
+        return array[0]
+    },
+    indexOf: function(array, value, fromIndex = 0) {
+        fromIndex < 0 ? fromIndex = 0 : fromIndex
+        for (var i = fromIndex; i < array.length; i++) {
+            if (array[i] === value) {
+                return i
+            }
+        }
+        return -1
+    },
+    initial: function(array) {
+        return array.slice(0, array.length - 1)
+    },
+    intersection: function(...arrays) {
+        var res = []
+        for (var j = 0; j < arrays[0].length; j++) {
+            var target = arrays[0][j]
+            for (var i = 1; i < arrays.length; i++) {
+                if (arrays[i].includes(target)) {
+                    if (i === arrays.length - 1) {
+                        res.push(target)
+                    }
+                    continue
+                } else {
+                    break
+                }
+            }
+        }
+        return res
     },
     //forEach(collection, [iteratee=_.identity])
     forEach: function(collection, func) {
@@ -264,47 +345,6 @@ var bairuobing = {
                 }
             }
         }
-    },
-    matches: function(source) {
-        return function(obj) {
-            for (var item in obj) {
-                if (source[item] !== obj[item]) {
-                    if (!isMatch(source[item], obj[item])) {
-                        return false
-                    } else {
-                        return true
-                    }
-                }
-            }
-            return true
-        }
-    },
-    matchesProperty: function(array) {
-        return this.matches(this.fromPairs(array))
-    },
-    /**
-     * [fromPairs description]
-     * @param  {[type]} Array [description]
-     * @return {[type]} Object [description]
-     */
-    fromPairs: function(pairs) {
-        var res = {}
-        for (var item of pairs) {
-            res[item[0]] = item[1]
-        }
-        return res
-    },
-    /**
-     * [toPairs description]
-     * @param  {[type]} Object [description]
-     * @return {[type]} Array [description]
-     */
-    toPairs: function(object) {
-        var res = []
-        for (var item in object) {
-            res.push([item, object[item]])
-        }
-        return res
     },
     isEqual: function(value, other) {
         if (value === other) {
