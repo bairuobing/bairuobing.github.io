@@ -343,7 +343,7 @@ var bairuobing = {
         }
         for (var item in source) {
             if (source[item] !== object[item]) {
-                if (!isMatch(object[item], source[item])) {
+                if (!this.isMatch(object[item], source[item])) {
                     return false
                 } else {
                     return true
@@ -426,6 +426,7 @@ var bairuobing = {
         }
     },
     every: function(ary, test) {
+        test = this.iteratee(test)
         for (var i = 0; i < ary.length; i++) {
             if (!test(ary[i], i, ary)) {
                 return false
@@ -434,7 +435,7 @@ var bairuobing = {
         return true
     },
     some: function(ary, test) {
-        test = iteratee(test)
+        test = this.iteratee(test)
         for (var i = 0; i < ary.length; i++) {
             if (test(ary[i], i, ary)) {
                 return true
