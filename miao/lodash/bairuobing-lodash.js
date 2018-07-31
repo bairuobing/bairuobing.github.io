@@ -1,5 +1,5 @@
 var bairuobing = {
-    iteratee(shorthand = this.identity) {
+    iteratee: function(shorthand = this.identity) {
         if (typeof shorthand === 'function') {
             return shorthand
         } else if (typeof shorthand === 'string') {
@@ -321,7 +321,7 @@ var bairuobing = {
     flattenDeep: function(array) {
         return this.flattenDepth(array, Infinity)
     },
-    flattenDepth(array, depth = 1) {
+    flattenDepth: function(array, depth = 1) {
         if (depth === 0) {
             return array.slice() //array 的副本
         }

@@ -2,7 +2,7 @@
  * @Author: BaiRuobing
  * @Date:   2018-06-28 09:13:52
  * @Last Modified by:   BaiRuobing
- * @Last Modified time: 2018-07-24 12:52:13
+ * @Last Modified time: 2018-07-31 21:28:55
  */
 function ListNode(val) {
     this.val = val;
@@ -390,3 +390,320 @@ var addTwoNumbers = function(l1, l2) {
     }
     return result.next
 }
+
+// Array.prototype.salice2 = function(start = 0, end = this.length) {
+//     var res = []
+//     end = end > this.length ? this.length : end
+//     for (var i = start; i < end; i++) {
+//         res.push(this[i])
+//     }
+//     return res
+// }
+
+
+
+// function toArray(val) {
+//     return [].slice.call(val)
+// }
+
+// toArray = [].slice.call.bind([].slice)
+
+
+
+var leafSimilar = function(root1, root2) {
+    var ary1 = []
+    var ary2 = []
+    preOrder(root1, ary1)
+    preOrder(root2, ary2)
+    var len2 = ary2.length
+    var len1 = ary1.length
+    if (len1 !== len2) {
+        return false
+    } else {
+        for (var i = 0; i < len1; i++) {
+            if (ary1[i] !== ary2[i]) {
+                return false
+            }
+        }
+        return true
+    }
+
+    function preOrder(root, array) {
+        if (!root) {
+            return
+        }
+        if (root.left == null && root.right == null) {
+            array.push(root.val)
+        }
+        preOrder(root.left, array)
+        preOrder(root.right, array)
+    }
+};
+
+function objToString(val) {
+    return val.constructor.name
+}
+
+//用call来实现继承
+function Product(name, price) {
+    this.name = name
+    this.price = price
+}
+
+function Food(name, price) {
+    Product.call(this, name, price)
+    this.category = 'food'
+}
+
+
+
+var convert = function(s, numRows) {
+    var len = s.length
+    if (len == 0 || nRows <= 1) {
+        return s
+    }
+    var result = new Array(numRows)
+    Arrays.fill(result, "")
+    var row = 0
+    var delta = 1
+    for (var i = 0; i < len; i++) {
+        result[row] += s[i]
+        row += delta
+        if (row >= nRows) {
+            row = nRows - 2
+            delta = -1
+        }
+        if (row < 0) {
+            row = 1
+            delta = 1
+        }
+    }
+    result = result.join("")
+    return result
+
+};
+
+
+
+// let arr = [1, 2, 1, 2, 3, 5, 4, 5, 3, 4, 4, 4, 4];
+// let result = arr.sort().reduce((init, current) => {
+//     if (init.length === 0 || init[init.length - 1] !== current) {
+//         init.push(current);
+//     }
+//     return init;
+// }, []);
+// console.log(result); //[1,2,3,4,5]
+
+
+
+var largeGroupPositions = function(S) {
+
+};
+
+
+// [3, 5, 2, 7, 8, 1, 4, 9].reduce(function(memo, value, index, array) {
+//     if (index === 0) {
+//         min = memo < value ? memo : value
+//         max = memo > value ? memo : value
+//     } else {
+//         if (value > max) {
+//             max = value
+//         }
+//         if (value < min) {
+//             min = value
+//         }
+//     }
+//     memo += value
+//     if (index === this.length - 1) {
+//         return (memo - min - max) / (this.length - 2)
+//     } else {
+//         return memo
+//     }
+// })
+
+function restoreTree(inOrder, postOrder) {
+    var root = new TreeNode(postOrder[postOrder.length - 1])
+
+    var leftTree = inOrder.slice(0, inOrder.indexOf(postOrder[postOrder.length - 1]))
+    var rightTree = inOrder.slice(inOrder.indexOf(postOrder[postOrder.length - 1]) + 1)
+
+
+}
+//爆栈
+var buildTree2 = function(preorder, inorder) {
+    var preStart = 0
+    if (preorder.length === 0 || inorder.length === 0) {
+        return null
+    }
+    return helper(preorder, inorder)
+
+    function helper(preorder, inorder) {
+        var node = preorder[preStart++]
+        var root = new TreeNode(node)
+
+
+        var leftInOrder = inorder.slice(0, inorder.indexOf(node))
+        if (leftInOrder.length === 0) {
+            return root
+        }
+        var rightInOrder = inorder.slice(inorder.indexOf(node) + 1)
+        if (rightInOrder.length === 0) {
+            return root
+        }
+
+        root.left = buildTree(preorder, leftInOrder)
+        root.right = buildTree(preorder, rightInOrder)
+
+        return root
+    }
+};
+//没爆栈
+var buildTree = function(preorder, inorder) {
+    var preStart = 0
+    if (preorder.length === 0 || inorder.length === 0) {
+        return null
+    }
+    return helper(0, inorder.length - 1, preorder, inorder)
+
+    function helper(inStart, inEnd, preorder, inorder) {
+        // Base情况
+        if (preStart > preorder.length || inStart > inEnd) {
+            return null
+        }
+        var root = new TreeNode(preorder[preStart])
+        var inMid = 0
+        // 找到根在中序序列中的位置，从而知道先序中的分割点
+        for (var i = inStart; i <= inEnd; i++) {
+            if (inorder[i] == preorder[preStart]) {
+                inMid = i
+            }
+        }
+        preStart++
+        // 例如先序序列 1(234)(567) 中2是左子树的根
+        root.left = helper(inStart, inMid - 1, preorder, inorder)
+        // 先序序列 1(234)(567) 中5是右子树的根
+        root.right = helper(inMid + 1, inEnd, preorder, inorder)
+        return root
+    }
+}
+
+
+
+var buildTree3 = function(inorder, postorder) {
+    var postEnd = postorder.length - 1
+    return helper(postorder, inorder, 0, inorder.length - 1)
+
+    function helper(postorder, inorder, inStart, inEnd) {
+        if (postEnd < 0 || inStart > inEnd) {
+            return null;
+        }
+        var root = new TreeNode(postorder[postEnd--])
+        var inMid = 0;
+        // 找到中序序列的根节点
+        for (var i = inStart; i <= inEnd; i++) {
+            if (inorder[i] == root.val) {
+                inMid = i
+                break
+            }
+        }
+        // 建好右子树
+        root.right = helper(postorder, inorder, inMid + 1, inEnd)
+        // 建好左子树
+        root.left = helper(postorder, inorder, inStart, inMid - 1)
+        return root
+    }
+}
+
+var inorderTraversal = function(root) {
+    var stack = []
+    var res = []
+    while (stack.length > 0 || root) {
+        if (root) {
+            stack.push(root)
+            root = root.left
+        } else {
+            root = stack.pop()
+            res.push(root.val)
+            root = root.right
+        }
+    }
+    return res
+};
+
+
+var preorderTraversal = function(root) {
+    var stack = []
+    var res = []
+    if (root) {
+        stack.push(root)
+    } else {
+        return res
+    }
+    while (stack.length > 0) {
+        root = stack.pop()
+        res.push(root.val)
+        if (root.right) {
+            stack.push(root.right)
+        }
+        if (root.left) {
+            stack.push(root.left)
+        }
+    }
+    return res
+};
+
+var postorderTraversal = function(root) {
+    function hasChild(treeNode) {
+        return (treeNode.left != null) || (treeNode.right != null)
+    }
+    var stack = []
+    var map = []
+    var res = []
+    if (root) {
+        stack.push(root)
+        map.push(root)
+    } else {
+        return res
+    }
+    while (stack.length > 0) {
+        root = stack[stack.length - 1]
+        if (hasChild(root)) {
+            if (map.includes(root.left) || map.includes(root.right)) {
+                root = stack.pop()
+                res.push(root.val)
+            } else {
+                if (root.right) {
+                    stack.push(root.right)
+                    map.push(root.right)
+                }
+                if (root.left) {
+                    stack.push(root.left)
+                    map.push(root.left)
+                }
+            }
+        } else {
+            root = stack.pop()
+            res.push(root.val)
+        }
+    }
+    return res
+};
+
+var climbStairs = function(n) {
+    var res = 0
+    helper(n, res)
+    return res
+
+    function helper(num) {
+        if (num === 0) {
+            res++
+            return
+        }
+        if (num < 0) {
+            return
+        }
+        helper(num - 1)
+        helper(num - 2)
+    }
+};
+
