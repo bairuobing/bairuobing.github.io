@@ -2,17 +2,23 @@
  * @Author: BaiRuobing
  * @Date:   2018-07-31 21:27:52
  * @Last Modified by:   BaiRuobing
- * @Last Modified time: 2018-07-31 23:41:51
+ * @Last Modified time: 2018-08-02 22:28:00
  */
 function MyMap(iterable) {
+    if(!(this instanceof MyMap)) {
+        return new MyMap(iterable)
+    }
+    if(!Array.isArray(iterable)) {
+        throw new Error('MyMap 仅支持数组作为参数')
+    }
     this.map = []
     if (iterable) {
         oooops: for (var i = 0; i < iterable.length; i++) {
             for (var item of this.map) {
-                if (item[0] === iterable[i][0]) {
-                    if (item[1] === iterable[i][1]) {
+                var k = Object.getOwnPropertyNames(item)
+                if (k[0] === iterable[i][0].toString()) {
+                        item[k] = iterable[i][1]
                         continue oooops
-                    }
                 }
             }
             var obj = new Object()
@@ -49,7 +55,7 @@ MyMap.prototype = {
     entries: function() {
         return this
     },
-    //============================================================== no-debug==================================================
+
     get: function(key) {
         for (var i = 0; i < this.map.length; i++) {
             if (this.map[i].hasOwnProperty(key)) {
@@ -129,3 +135,32 @@ MySet.prototype.values = function() {
     })
     return SetIterator 
 }
+
+//=======================================================================
+function MyArray(...iterable) {
+    if(iterable.length < 0) {
+        throw new Error('无效的myarray长度')
+    }
+    if(iterable.length === 0) {
+        this.array = {}
+    }
+    if(iterable.length === 1) {
+        for(var i = 0; i < iterable[0]; i++) {
+            this.array[i] = undefined
+        }
+
+    }   
+    if(iterable.length > 1) {
+        for(var i = 0; i < iterable.length; i++) {
+            this.array[i] = iterable[i]
+        }
+    }
+    this.array = {}
+}
+
+Object.defineProperty(MyArray.prototype, "_length", {
+    get: function() {
+        return Object.values(this.array).length
+    }
+})
+

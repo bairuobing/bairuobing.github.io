@@ -1,25 +1,69 @@
-var bairuobing = {
-    iteratee: function(shorthand = this.identity) {
+var bairuobing = function() {
+    return {
+        iteratee: iteratee,
+        identity: identity,
+        property: property,
+        matches: matches,
+        matchesProperty: matchesProperty,
+        fromPairs: fromPairs,
+        toPairs: toPairs,
+        unary: unary,
+        negate: negate,
+        chunk: chunk,
+        compact: compact,
+        concat: concat,
+        difference: difference,
+        differenceBy: differenceBy,
+        differenceWith: differenceWith,
+        drop: drop,
+        dropRight: dropRight,
+        dropRightWhile: dropRightWhile,
+        dropWhile: dropWhile,
+        fill: fill,
+        findIndex: findIndex,
+        head: head,
+        indexOf: indexOf,
+        initial: initial,
+        intersection: intersection,
+        forEach: forEach,
+        cloneDeep: cloneDeep,
+        filter: filter,
+        map: map,
+        reduce: reduce,
+        flatten: flatten,
+        flattenDeep: flattenDeep,
+        flattenDepth: flattenDepth,
+        isMatch: isMatch,
+        isEqual: isEqual,
+        uniq: uniq,
+        uniqBy: uniqBy,
+        every: every,
+        some: some
+    }
+
+    function iteratee(shorthand = identity) {
         if (typeof shorthand === 'function') {
             return shorthand
         } else if (typeof shorthand === 'string') {
-            return this.property(shorthand)
+            return property(shorthand)
         } else if (Array.isArray(shorthand)) {
-            return this.matchesProperty(shorthand)
+            return matchesProperty(shorthand)
         } else {
-            return this.matches(shorthand)
+            return matches(shorthand)
         }
-    },
-    identity: value => value,
+    }
+    function identity(value){
+        return value
+    }
     //通过字符串参数获取对象的某属性值
-    property: function(propName) {
+    function property(propName) {
         return obj => obj[propName]
-    },
-    matches: function(source) {
+    }
+    function matches(source) {
         return function(obj) {
             for (var item in obj) {
                 if (source[item] !== obj[item]) {
-                    if (!this.isMatch(source[item], obj[item])) {
+                    if (!isMatch(source[item], obj[item])) {
                         return false
                     } else {
                         return true
@@ -28,19 +72,19 @@ var bairuobing = {
             }
             return true
         }
-    },
-    matchesProperty: function(array) {
-        return this.matches(this.fromPairs(array))
-    },
+    }
+    function matchesProperty(array) {
+        return matches(fromPairs(array))
+    }
 
-    fromPairs: function(pairs) {
+    function fromPairs(pairs) {
         var res = {}
         for (var item of pairs) {
             res[item[0]] = item[1]
         }
         return res
-    },
-    toPairs: function(object) {
+    }
+    function toPairs(object) {
         var res = []
         for (var item in object) {
             if (object.hasOwnProperty(item)) {
@@ -49,26 +93,26 @@ var bairuobing = {
 
         }
         return res
-    },
+    }
 
-    unary: function(func) {
+    function unary(func) {
         return function(value) {
             return func(value)
         }
-    },
+    }
     //创建一个否定一个判定函数的函数,接受到的任何参数都给原函数,只不过返回的是原函数的相反函数罢了
-    negate: function(func) {
+    function negate(func) {
         return function(...args) {
             return !func(...args)
         }
-    },
+    }
     /**
      * 切片,创建一个元素数组,如果数组无法均匀分割,则最终的块将是剩余的元素
      * @param  {[type]} array [description]
      * @param  {Number} size  [description]
      * @return {[type]}       [description]
      */
-    chunk: function(array, size = 1) {
+    function chunk(array, size = 1) {
         var len = array.length
         var tmp = []
         var res = []
@@ -83,9 +127,9 @@ var bairuobing = {
             }
         }
         return res
-    },
+    }
     //紧凑,创建一个数组,将所有无效值都去除
-    compact: function(array) {
+    function compact(array) {
         var res = []
         for (var i = 0; i < array.length; i++) {
             if (array[i]) {
@@ -93,14 +137,14 @@ var bairuobing = {
             }
         }
         return res
-    },
+    }
     /**
      * [concat description]
      * @param  {[type]}    array  [description]
      * @param  {...[type]} values [description]
      * @return {[type]}           [description]
      */
-    concat: function(array, ...values) {
+    function concat(array, ...values) {
         var val = values[0]
         var res = array
         for (var i = 1; i < values.length; i++) {
@@ -108,8 +152,8 @@ var bairuobing = {
         }
         res = res.concat(val)
         return res
-    },
-    difference: function(array, ...values) {
+    }
+    function difference(array, ...values) {
         var res = []
         var val = []
         //合并剩余参数数组
@@ -122,16 +166,16 @@ var bairuobing = {
             }
         }
         return res
-    },
+    }
     //iteratee标准情况为一个function, 也可以传一个 字符串 (需要 property())
-    differenceBy: function(array, ...args) {
+    function differenceBy(array, ...args) {
         var iteratee //函数签名为参数,但由于剩余参数只能为参数列表最后一项,所以声明为函数内部变量,还需要深度展开函数
         //参数归一化
         if (typeof args[args.length - 1] === 'string') {
-            var f = this.iteratee(args.pop()) //iteratee === 'x'
+            var f = iteratee(args.pop()) //iteratee === 'x'
             var argues = []
             var res = []
-            argues = this.flattenDeep(args)
+            argues = flattenDeep(args)
             for (var item of array) {
                 for (var index of argues) {
                     if (f(item) !== f(index)) {
@@ -144,7 +188,7 @@ var bairuobing = {
             iteratee = args.pop()
             var argues = []
             var res = []
-            argues = this.flattenDeep(args)
+            argues = flattenDeep(args)
             for (var i = 0; i < argues.length; i++) {
                 argues[i] = iteratee(argues[i])
             }
@@ -155,14 +199,14 @@ var bairuobing = {
             }
             return res
         } else {
-            iteratee = this.identity
-            return this.difference(array, ...args)
+            iteratee = identity
+            return difference(array, ...args)
         }
-    },
+    }
     //isEqual 已经考虑到多种情况,故在此不多做考虑
-    differenceWith: function(array, ...args) {
-        var comparator = this.iteratee(args.pop())
-        var argues = this.flattenDeep(args)
+    function differenceWith(array, ...args) {
+        var comparator = iteratee(args.pop())
+        var argues = flattenDeep(args)
         var res = []
         for (var item of array) {
             for (var index of argues) {
@@ -172,51 +216,51 @@ var bairuobing = {
             }
         }
         return res
-    },
-    drop: function(array, number = 1) {
+    }
+    function drop(array, number = 1) {
         return array.slice(number, array.length)
-    },
-    dropRight: function(array, number = 1) {
+    }
+    function dropRight(array, number = 1) {
         if (number >= array.length) {
             number = array.length
         }
         return array.slice(0, array.length - number)
-    },
-    dropRightWhile: function(array, predicate = this.identity) {
-        predicate = this.iteratee(predicate)
+    }
+    function dropRightWhile(array, predicate = identity) {
+        predicate = iteratee(predicate)
         for (var i = array.length - 1; i >= 0; i--) {
             if (!predicate(array[i])) {
                 return array.slice(0, i + 1)
             }
         }
-    },
-    dropWhile: function(array, predicate = this.identity) {
-        predicate = this.iteratee(predicate)
+    }
+    function dropWhile(array, predicate = identity) {
+        predicate = iteratee(predicate)
         for (var i = array.length - 1; i >= 0; i--) {
             if (!predicate(array[i])) {
                 return array.slice(i)
             }
         }
-    },
-    fill(array, value, start = 0, end = array.length) {
+    }
+    function fill(array, value, start = 0, end = array.length) {
         for (var i = start; i < end; i++) {
             array[i] = value
         }
         return array
-    },
-    findIndex(array, predicate = this.identity, fromIndex = 0) {
-        predicate = this.iteratee(predicate)
+    }
+    function findIndex(array, predicate = identity, fromIndex = 0) {
+        predicate = iteratee(predicate)
         for (var i = fromIndex; i < array.length; i++) {
             if (predicate(array[i])) {
                 return i
             }
         }
         return -1
-    },
-    head: function(array) {
+    }
+    function head(array) {
         return array[0]
-    },
-    indexOf: function(array, value, fromIndex = 0) {
+    }
+    function indexOf(array, value, fromIndex = 0) {
         fromIndex < 0 ? fromIndex = 0 : fromIndex
         for (var i = fromIndex; i < array.length; i++) {
             if (array[i] === value) {
@@ -224,11 +268,11 @@ var bairuobing = {
             }
         }
         return -1
-    },
-    initial: function(array) {
+    }
+    function initial(array) {
         return array.slice(0, array.length - 1)
-    },
-    intersection: function(...arrays) {
+    }
+    function intersection(...arrays) {
         var res = []
         for (var j = 0; j < arrays[0].length; j++) {
             var target = arrays[0][j]
@@ -244,9 +288,9 @@ var bairuobing = {
             }
         }
         return res
-    },
+    }
     //forEach(collection, [iteratee=_.identity])
-    forEach: function(collection, func) {
+    function forEach(collection, func) {
         if (Array.isArray(collection)) {
             for (var i = 0; i < collection.length; i++) {
                 func(collection[i])
@@ -259,12 +303,14 @@ var bairuobing = {
             }
             return collection
         }
-    },
+    }
     //先JSON序列化,再反序列化看来实现深复制
-    cloneDeep: value => JSON.parse((JSON.stringify(value))),
+    function cloneDeep(value) {
+        return JSON.parse((JSON.stringify(value)))
+    }
     //分两种情况,数组 和 对象
-    filter: function(collection, test) {
-        test = this.iteratee(test)
+    function filter(collection, test) {
+        test = iteratee(test)
         var res = []
         if (Array.isArray(collection)) {
             for (var i = 0; i < collection.length; i++) {
@@ -282,10 +328,10 @@ var bairuobing = {
             }
             return res
         }
-    },
+    }
     //
-    map: function(collection, mapper) {
-        mapper = this.iteratee(mapper)
+    function map(collection, mapper) {
+        mapper = iteratee(mapper)
         var res = []
         if (Array.isArray(collection)) {
             for (var i = 0; i < collection.length; i++) {
@@ -299,9 +345,9 @@ var bairuobing = {
             }
             return res
         }
-    },
+    }
     //
-    reduce: function(collection, reducer, initialValue) {
+    function reduce(collection, reducer, initialValue) {
         if (Array.isArray(collection)) {
             for (var i = 0; i < collection.length; i++) {
                 initialValue = reducer(initialValue, collection[i])
@@ -314,44 +360,44 @@ var bairuobing = {
             }
             return initialValue
         }
-    },
-    flatten: function(array) {
-        return this.flattenDepth(array)
-    },
-    flattenDeep: function(array) {
-        return this.flattenDepth(array, Infinity)
-    },
-    flattenDepth: function(array, depth = 1) {
+    }
+    function flatten(array) {
+        return flattenDepth(array)
+    }
+    function flattenDeep(array) {
+        return flattenDepth(array, Infinity)
+    }
+    function flattenDepth(array, depth = 1) {
         if (depth === 0) {
             return array.slice() //array 的副本
         }
         var res = []
         for (var i = 0; i < array.length; i++) {
             if (Array.isArray(array[i])) {
-                var tmp = this.flattenDepth(array[i], depth - 1)
+                var tmp = flattenDepth(array[i], depth - 1)
                 res = [...res, ...tmp]
             } else {
                 res.push(array[i])
             }
         }
         return res
-    },
+    }
 
-    isMatch: function(object, source) {
+    function isMatch(object, source) {
         if (typeof object !== 'object' || typeof source !== 'object') {
             return false
         }
         for (var item in source) {
             if (source[item] !== object[item]) {
-                if (!this.isMatch(object[item], source[item])) {
+                if (!isMatch(object[item], source[item])) {
                     return false
                 } else {
                     return true
                 }
             }
         }
-    },
-    isEqual: function(value, other) {
+    }
+    function isEqual(value, other) {
         if (value === other) {
             return true
         }
@@ -363,7 +409,7 @@ var bairuobing = {
                 return false
             }
             for (var i = 0; i < value.length; i++) {
-                if (!this.isEqual(value[i], other[i])) {
+                if (!isEqual(value[i], other[i])) {
                     return false
                 }
             }
@@ -380,17 +426,17 @@ var bairuobing = {
             for (var item in other) {
                 propName.push(item)
             }
-            propName = this.uniq(propName)
+            propName = uniq(propName)
             for (var i = 0; i < propName.length; i++) {
-                if (!this.isEqual(value[i], other[i])) {
+                if (!isEqual(value[i], other[i])) {
                     return false
                 }
             }
             return true
         }
-    },
+    }
     //用indexOf简化两层for循环
-    uniq: function(array) {
+    function uniq(array) {
         var res = []
         for (var i = 0; i < array.length; i++) {
             if (res.indexOf(array[i]) === -1) {
@@ -398,10 +444,10 @@ var bairuobing = {
             }
         }
         return res
-    },
-    uniqBy: function(array, iteratee = this.identity) {
+    }
+    function uniqBy(array, iteratee = identity) {
         if (typeof iteratee === 'function') {
-            var func = this.iteratee(iteratee)
+            var func = iteratee(iteratee)
             var model = []
             var res = []
             for (var i = 0; i < array.length; i++) {
@@ -413,7 +459,7 @@ var bairuobing = {
             return res
         }
         if (typeof iteratee === 'string') {
-            var prop = this.iteratee(iteratee)
+            var prop = iteratee(iteratee)
             var model = []
             var res = []
             for (var item of array) {
@@ -424,25 +470,24 @@ var bairuobing = {
             }
             return res
         }
-    },
-    every: function(ary, test) {
-        test = this.iteratee(test)
+    }
+    function every(ary, test) {
+        test = iteratee(test)
         for (var i = 0; i < ary.length; i++) {
             if (!test(ary[i], i, ary)) {
                 return false
             }
         }
         return true
-    },
-    some: function(ary, test) {
-        test = this.iteratee(test)
+    }
+    function some(ary, test) {
+        test = iteratee(test)
         for (var i = 0; i < ary.length; i++) {
             if (test(ary[i], i, ary)) {
                 return true
             }
         }
         return false
-    },
+    }
 
-
-}
+}()
