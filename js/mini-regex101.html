@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>mini-regex</title>
+</head>
+<style>
+    span:nth-of-type(odd).match {
+        background-color: rgba(198,227,255);
+    }
+    span:nth-of-type(even).match {
+        background-color: rgba(116,196,255);
+    }
+    span:empty {
+        border: 1px solid red;
+        background-color: red;
+    }
+    textarea {
+        display: block;
+    }
+</style>
+<body>
+    <input type="text" id="reInput" onkeyup="change();sub()">
+    <textarea name="" id="strInput" cols="30" rows="10" onkeyup="change();sub()"></textarea>
+    <div id="output"></div>
+
+    <input type="text" id="subInput" onkeyup="sub()">
+    <div id="substitued"></div>
+</body>
+<script>
+    function sub() {
+        substitued.innerHTML = strInput.value.replace(new RegExp(reInput.value, 'ig'), subInput.value)
+    }
+
+    function change() {
+        var reStr = reInput.value
+        try {
+            var re = new RegExp(reStr,'ig')
+        } catch(e) {
+            if (e instanceof SyntaxError) {
+                output.innerHTML = e.toString()
+                return
+            } else {
+                throw e //不是正则表达式的错误则继续抛出
+            }
+        }
+
+        var str = strInput.value
+
+        var match
+        var resultHtml = ''
+        var laslastIndex = 0
+        while(match = re.exec(str)) {
+            resultHtml += str.slice(laslastIndex, match.index)
+            resultHtml += `<span class="match">${match[0]}</span>`
+            laslastIndex = re.lastIndex
+            if(match[0].length === 0) {
+                re.lastIndex++
+            }
+        }
+        resultHtml += str.slice(laslastIndex)
+
+        output.innerHTML = resultHtml
+
+    }
+</script>
+</html>

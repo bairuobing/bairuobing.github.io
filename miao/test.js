@@ -2,7 +2,7 @@
  * @Author: BaiRuobing
  * @Date:   2018-06-28 09:13:52
  * @Last Modified by:   BaiRuobing
- * @Last Modified time: 2018-07-31 21:28:55
+ * @Last Modified time: 2018-08-09 20:40:53
  */
 function ListNode(val) {
     this.val = val;
@@ -707,3 +707,82 @@ var climbStairs = function(n) {
     }
 };
 
+String.raw = function raw(parts, ...insertions) {
+    return parts.raw.reduce((result, part, i) => {
+        return result + insertions[i - 1] + part
+    })
+}
+
+
+function decipherThis(str) {
+    var ary = str.replace(/\d+/g, function(match, p1, p2, p3, offset, string) {
+        return String.fromCharCode(parseInt(match))
+    }).split(' ')
+
+
+    for (var i = 0; i < ary.length; i++) {
+        var items = ary[i].split('')
+        if (items.length > 2) {
+            var tmp = items[1]
+            items[1] = items[items.length - 1]
+            items[items.length - 1] = tmp
+            ary[i] = items.join('')
+        }
+    }
+    return ary.join(' ')
+};
+
+
+var BSTIterator = function(root) {
+    this.stack = new Array()
+    while (root) {
+        this.stack.push(root)
+        root = root.left
+    }
+};
+
+BSTIterator.prototype.hasNext = function() {
+    return this.stack.length > 0
+};
+
+BSTIterator.prototype.next = function() {
+    var node = this.stack.pop()
+    var res = node.val
+    if (node.right) {
+        node = node.right
+        while (node) {
+            this.stack.push(node)
+            node = node.left
+        }
+
+    }
+    return res
+};
+
+
+var evalRPN = function(tokens) {
+    var stack = []
+    for (var i = 0; i < tokens.length; i++) {
+        if (/\d+/.test(tokens[i])) { //是操作数
+            stack.push(parseInt(tokens[i]))
+        } else { //是操作符
+            var B = stack.pop()
+            var A = stack.pop()
+            switch (tokens[i]) {
+                case '+':
+                    stack.push(A + B)
+                    break
+                case '-':
+                    stack.push(A - B)
+                    break
+                case '*':
+                    stack.push(A * B)
+                    break
+                case '/':
+                    stack.push(A / B)
+                    break
+            }
+        }
+    }
+    return stack.pop()
+};

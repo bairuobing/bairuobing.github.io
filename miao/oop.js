@@ -2,23 +2,23 @@
  * @Author: BaiRuobing
  * @Date:   2018-07-31 21:27:52
  * @Last Modified by:   BaiRuobing
- * @Last Modified time: 2018-08-02 22:28:00
+ * @Last Modified time: 2018-08-04 17:21:12
  */
 function MyMap(iterable) {
-    if(!(this instanceof MyMap)) {
+    if (!(this instanceof MyMap)) {
         return new MyMap(iterable)
-    }
-    if(!Array.isArray(iterable)) {
-        throw new Error('MyMap 仅支持数组作为参数')
     }
     this.map = []
     if (iterable) {
+        if (!Array.isArray(iterable)) {
+            throw new Error('MyMap 仅支持数组作为参数')
+        }
         oooops: for (var i = 0; i < iterable.length; i++) {
             for (var item of this.map) {
                 var k = Object.getOwnPropertyNames(item)
                 if (k[0] === iterable[i][0].toString()) {
-                        item[k] = iterable[i][1]
-                        continue oooops
+                    item[k] = iterable[i][1]
+                    continue oooops
                 }
             }
             var obj = new Object()
@@ -46,7 +46,7 @@ MyMap.prototype = {
         if (idx < 0) {
             return false
         } else {
-            this.map = this.map.filter(function(element,index) {
+            this.map = this.map.filter(function(element, index) {
                 return index !== idx
             })
             return true
@@ -100,6 +100,7 @@ Object.defineProperty(MySet.prototype, "size", {
         return this.set.length
     }
 })
+
 MySet.prototype.add = function(value) {
     if (this.set.indexOf(value) < 0) {
         this.set.push(value)
@@ -138,29 +139,62 @@ MySet.prototype.values = function() {
 
 //=======================================================================
 function MyArray(...iterable) {
-    if(iterable.length < 0) {
-        throw new Error('无效的myarray长度')
-    }
-    if(iterable.length === 0) {
+    if (iterable.length === 0) {
         this.array = {}
-    }
-    if(iterable.length === 1) {
-        for(var i = 0; i < iterable[0]; i++) {
-            this.array[i] = undefined
+    } else if (iterable.length === 1) {
+        if (iterable[0] < 0) {
+            throw new Error('无效的MyArray长度')
         }
-
-    }   
-    if(iterable.length > 1) {
-        for(var i = 0; i < iterable.length; i++) {
+        this.array = {}
+        for (var i = 0; i < iterable[0]; i++) {
+            this.array[i] = null
+        }
+    } else if (iterable.length > 1) {
+        this.array = {}
+        for (var i = 0; i < iterable.length; i++) {
             this.array[i] = iterable[i]
         }
     }
-    this.array = {}
 }
 
 Object.defineProperty(MyArray.prototype, "_length", {
     get: function() {
-        return Object.values(this.array).length
+        return Object.values(this.array).length //现将其还原为数组
+    },
+    set: function(value) {
+        if(value < this._length) {
+            var len = this._length
+            for(var i = value; i < len; i++) {
+                delete this.array[i]
+            }
+        } else if (value > this._length) {
+            var len = this._length
+            for(var i = len; i < value; i++) {
+                this.array[i] = null
+            }
+        }
+        
     }
 })
 
+
+MyArray.isArray = function(obj) {
+    return Object.prototype.toString.call(obj) === '[object Array]'
+}
+
+MyArray.of = function(...iterable) {
+    var o = new MyArray()
+    if (iterable.length === 0) {
+        return o
+    } else if (iterable.length > 0) {
+        o.array = {}
+        for (var i = 0; i < iterable.length; i++) {
+            o.array[i] = iterable[i]
+        }
+    }
+    return o
+}
+
+MyArray.prototype.concat = function() {
+
+}
