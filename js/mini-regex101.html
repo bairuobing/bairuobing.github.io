@@ -3,8 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <title>mini-regex</title>
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </head>
 <style>
+    hr {
+        margin: 2px;
+    }
+    label {
+        text-transform:uppercase;
+        margin-bottom: 0;
+        margin-top: 10px;
+    }
+    body {
+        background-color: rgba(235,235,235);
+    }
+    .container {
+        min-width: 575px;
+    }
+    .top-bar {
+        position: relative;
+        background-color: rgba(69,122,187);
+        color: #b0b0b0;
+        height: 45px;
+        width: 100%; 
+        font-size: 12px;
+    }
     span:nth-of-type(odd).match {
         background-color: rgba(198,227,255);
     }
@@ -17,15 +45,32 @@
     }
     textarea {
         display: block;
+        resize:none;
     }
 </style>
 <body>
-    <input type="text" id="reInput" onkeyup="change();sub()">
-    <textarea name="" id="strInput" cols="30" rows="10" onkeyup="change();sub()"></textarea>
-    <div id="output"></div>
-
-    <input type="text" id="subInput" onkeyup="sub()">
-    <div id="substitued"></div>
+    <div class="top-bar"></div>
+    <div class="container col-5">
+        <label><b>Regular expression</b></label>
+        <hr>
+        <input type="text" id="reInput" onkeyup="change();sub()" placeholder="Insert your regular expression here" class="form-control">
+        
+        <label><b>Test string</b></label>
+        <hr>
+        <textarea name="" id="strInput" cols="30" rows="10" onkeyup="change();sub()" placeholder="Insert your test string here" class="form-control"></textarea>
+        
+        <label><b>Output</b></label>
+        <hr>
+        <div id="output" class="alert alert-dark"></div>
+        
+        <label><b>replacement value</b></label>
+        <hr>
+        <input type="text" id="subInput" onkeyup="sub()" placeholder="Insert your replacement value here" class="form-control">
+        
+        <label><b>Substitued</b></label>
+        <hr>
+        <div id="substitued" class="alert alert-dark"></div>
+    </div>
 </body>
 <script>
     function sub() {

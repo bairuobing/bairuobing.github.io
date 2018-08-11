@@ -2,7 +2,7 @@
  * @Author: BaiRuobing
  * @Date:   2018-06-28 09:13:52
  * @Last Modified by:   BaiRuobing
- * @Last Modified time: 2018-08-09 20:40:53
+ * @Last Modified time: 2018-08-10 18:24:25
  */
 function ListNode(val) {
     this.val = val;
@@ -785,4 +785,57 @@ var evalRPN = function(tokens) {
         }
     }
     return stack.pop()
+};
+
+var restoreIpAddresses = function(s) {
+    var result = []
+    var parts = []
+    helper(s, 3)
+    return result
+
+    function isLegal(str) {
+        if (str.length === 0) {
+            return false
+        } else if (str.length > 3) {
+            return false
+        } else if (str.length === 3) {
+            if (str < 100 || str > 255) {
+                return false
+            } else {
+                return true
+            }
+        } else if (str.length === 2) {
+            if (str < 10) {
+                return false
+            } else {
+                return true
+            }
+        } else {
+            return true
+        }
+    }
+
+    function helper(str, n) {
+        if (n === 0) {
+            if (!isLegal(str)) {
+                return
+            } else {
+                parts.push(str)
+                result.push(parts.join('.'))
+                parts.pop()
+                return
+            }
+        }
+        for (var i = 1; i <= 3; i++) {
+            var part = str.slice(0, i)
+            if (isLegal(part)) {
+                parts.push(part)
+            } else {
+                continue
+            }
+            helper(str.slice(i), n - 1)
+            parts.pop()
+        }
+    }
+
 };
