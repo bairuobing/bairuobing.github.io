@@ -2,7 +2,7 @@
  * @Author: BaiRuobing
  * @Date:   2018-06-28 09:13:52
  * @Last Modified by:   BaiRuobing
- * @Last Modified time: 2018-08-10 18:24:25
+ * @Last Modified time: 2018-08-11 23:36:11
  */
 function ListNode(val) {
     this.val = val;
@@ -837,5 +837,65 @@ var restoreIpAddresses = function(s) {
             parts.pop()
         }
     }
+
+};
+
+var calculate = function(s) {
+    var str = s.replace(/\s+/g,"")
+    var exp = str.split('')
+    exp.push('\0')
+
+    var num_stack = []
+    var sym_stack = []
+    sym_stack.push('\0') //哨兵
+    var i = 0
+    var reg = /\d/
+    var reg2 = /[\(\)\+\-\0]/
+    while (sym_stack.length !== 0) {
+        if (reg.test(exp[i])) { //is操作数
+            var num = 0
+            while (reg.test(exp[i])) {
+                num = num * 10 + parseInt(exp[i++])
+            }
+            if (sym_stack[sym_stack.length - 1] === '+') {
+                num_stack.push((num + parseInt(num_stack.pop())).toString())
+                sym_stack.pop()
+            } else if (sym_stack[sym_stack.length - 1] === '-') {
+                num_stack.push((parseInt(num_stack.pop()) - num).toString())
+                sym_stack.pop()
+            } else {
+                num_stack.push(num.toString())
+            }
+
+            continue
+        } else if (reg2.test(exp[i])) { //是运算符
+            switch (exp[i]) {
+                case '(':
+                case '+':
+                case '-':
+                    sym_stack.push(exp[i])
+                    break
+                case ')':
+                    sym_stack.pop()
+                    if (sym_stack[sym_stack.length - 1] === '+') {
+                        var A = +num_stack.pop()
+                        var B = +num_stack.pop()
+                        num_stack.push((B + A).toString())
+                        sym_stack.pop()
+                    } else if (sym_stack[sym_stack.length - 1] === '-') {
+                        var A = +num_stack.pop()
+                        var B = +num_stack.pop()
+                        num_stack.push((B - A).toString())
+                        sym_stack.pop()
+                    }
+                    break
+                case '\0':
+                    sym_stack.pop()
+                    break
+            }
+            i++
+        }
+    }
+    return num_stack.pop()
 
 };

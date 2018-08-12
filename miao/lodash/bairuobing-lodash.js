@@ -52,38 +52,40 @@ var bairuobing = function() {
             return matches(shorthand)
         }
     }
-    function identity(value){
+
+    function identity(value) {
         return value
     }
     //通过字符串参数获取对象的某属性值
     function property(propName) {
         return obj => obj[propName]
     }
+
     function matches(source) {
         return function(obj) {
-            for (var item in obj) {
+            for (var item in source) {
                 if (source[item] !== obj[item]) {
                     if (!isMatch(source[item], obj[item])) {
                         return false
-                    } else {
-                        return true
                     }
                 }
             }
             return true
         }
     }
+
     function matchesProperty(array) {
         return matches(fromPairs(array))
     }
 
     function fromPairs(pairs) {
         var res = {}
-        for (var item of pairs) {
-            res[item[0]] = item[1]
+        for (var i = 0; i < pairs.length; i++) {
+            res[pairs[0]] = pairs[1]
         }
         return res
     }
+
     function toPairs(object) {
         var res = []
         for (var item in object) {
@@ -106,12 +108,7 @@ var bairuobing = function() {
             return !func(...args)
         }
     }
-    /**
-     * 切片,创建一个元素数组,如果数组无法均匀分割,则最终的块将是剩余的元素
-     * @param  {[type]} array [description]
-     * @param  {Number} size  [description]
-     * @return {[type]}       [description]
-     */
+
     function chunk(array, size = 1) {
         var len = array.length
         var tmp = []
@@ -138,12 +135,7 @@ var bairuobing = function() {
         }
         return res
     }
-    /**
-     * [concat description]
-     * @param  {[type]}    array  [description]
-     * @param  {...[type]} values [description]
-     * @return {[type]}           [description]
-     */
+
     function concat(array, ...values) {
         var val = values[0]
         var res = array
@@ -153,6 +145,7 @@ var bairuobing = function() {
         res = res.concat(val)
         return res
     }
+
     function difference(array, ...values) {
         var res = []
         var val = []
@@ -217,15 +210,18 @@ var bairuobing = function() {
         }
         return res
     }
+
     function drop(array, number = 1) {
         return array.slice(number, array.length)
     }
+
     function dropRight(array, number = 1) {
         if (number >= array.length) {
             number = array.length
         }
         return array.slice(0, array.length - number)
     }
+
     function dropRightWhile(array, predicate = identity) {
         predicate = iteratee(predicate)
         for (var i = array.length - 1; i >= 0; i--) {
@@ -234,6 +230,7 @@ var bairuobing = function() {
             }
         }
     }
+
     function dropWhile(array, predicate = identity) {
         predicate = iteratee(predicate)
         for (var i = array.length - 1; i >= 0; i--) {
@@ -242,12 +239,14 @@ var bairuobing = function() {
             }
         }
     }
+
     function fill(array, value, start = 0, end = array.length) {
         for (var i = start; i < end; i++) {
             array[i] = value
         }
         return array
     }
+
     function findIndex(array, predicate = identity, fromIndex = 0) {
         predicate = iteratee(predicate)
         for (var i = fromIndex; i < array.length; i++) {
@@ -257,9 +256,16 @@ var bairuobing = function() {
         }
         return -1
     }
+
+    function findLastIndex(array, predicate = identity, fromIndex = array.length - 1) {
+        predicate = iteratee(predicate)
+
+    }
+
     function head(array) {
         return array[0]
     }
+
     function indexOf(array, value, fromIndex = 0) {
         fromIndex < 0 ? fromIndex = 0 : fromIndex
         for (var i = fromIndex; i < array.length; i++) {
@@ -269,9 +275,11 @@ var bairuobing = function() {
         }
         return -1
     }
+
     function initial(array) {
         return array.slice(0, array.length - 1)
     }
+
     function intersection(...arrays) {
         var res = []
         for (var j = 0; j < arrays[0].length; j++) {
@@ -361,12 +369,15 @@ var bairuobing = function() {
             return initialValue
         }
     }
+
     function flatten(array) {
         return flattenDepth(array)
     }
+
     function flattenDeep(array) {
         return flattenDepth(array, Infinity)
     }
+
     function flattenDepth(array, depth = 1) {
         if (depth === 0) {
             return array.slice() //array 的副本
@@ -394,9 +405,12 @@ var bairuobing = function() {
                 } else {
                     return true
                 }
+            } else {
+                return true
             }
         }
     }
+
     function isEqual(value, other) {
         if (value === other) {
             return true
@@ -445,32 +459,20 @@ var bairuobing = function() {
         }
         return res
     }
-    function uniqBy(array, iteratee = identity) {
-        if (typeof iteratee === 'function') {
-            var func = iteratee(iteratee)
-            var model = []
-            var res = []
-            for (var i = 0; i < array.length; i++) {
-                if (model.indexOf(func(array[i])) === -1) {
-                    model.push(func(array[i]))
-                    res.push(array[i])
-                }
+
+    function uniqBy(array, itera = identity) {
+        var func = iteratee(itera)
+        var model = []
+        var res = []
+        for (var i = 0; i < array.length; i++) {
+            if (model.indexOf(func(array[i])) === -1) {
+                model.push(func(array[i]))
+                res.push(array[i])
             }
-            return res
         }
-        if (typeof iteratee === 'string') {
-            var prop = iteratee(iteratee)
-            var model = []
-            var res = []
-            for (var item of array) {
-                if (model.indexOf(prop(item)) === -1) {
-                    model.push(prop(item))
-                    res.push(item)
-                }
-            }
-            return res
-        }
+        return res
     }
+
     function every(ary, test) {
         test = iteratee(test)
         for (var i = 0; i < ary.length; i++) {
@@ -480,6 +482,7 @@ var bairuobing = function() {
         }
         return true
     }
+
     function some(ary, test) {
         test = iteratee(test)
         for (var i = 0; i < ary.length; i++) {
@@ -491,3 +494,5 @@ var bairuobing = function() {
     }
 
 }()
+
+var __ = bairuobing
