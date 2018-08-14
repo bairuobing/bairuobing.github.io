@@ -21,6 +21,7 @@ var bairuobing = function() {
         dropWhile: dropWhile,
         fill: fill,
         findIndex: findIndex,
+        findLastIndex: findLastIndex,
         head: head,
         indexOf: indexOf,
         initial: initial,
@@ -96,7 +97,7 @@ var bairuobing = function() {
         }
         return res
     }
-
+    //使函数只接受一个参数
     function unary(func) {
         return function(value) {
             return func(value)
@@ -137,13 +138,7 @@ var bairuobing = function() {
     }
 
     function concat(array, ...values) {
-        var val = values[0]
-        var res = array
-        for (var i = 1; i < values.length; i++) {
-            val = val.concat(values[i])
-        }
-        res = res.concat(val)
-        return res
+        return array.concat(...values)
     }
 
     function difference(array, ...values) {
@@ -160,9 +155,9 @@ var bairuobing = function() {
         }
         return res
     }
-    //iteratee标准情况为一个function, 也可以传一个 字符串 (需要 property())
+
     function differenceBy(array, ...args) {
-        var iteratee //函数签名为参数,但由于剩余参数只能为参数列表最后一项,所以声明为函数内部变量,还需要深度展开函数
+        //函数签名为参数,但由于剩余参数只能为参数列表最后一项,所以声明为函数内部变量,还需要深度展开函数
         //参数归一化
         if (typeof args[args.length - 1] === 'string') {
             var f = iteratee(args.pop()) //iteratee === 'x'
@@ -178,15 +173,15 @@ var bairuobing = function() {
             }
             return res
         } else if (typeof args[args.length - 1] === 'function') {
-            iteratee = args.pop()
+            var f = iteratee(args.pop())
             var argues = []
             var res = []
             argues = flattenDeep(args)
             for (var i = 0; i < argues.length; i++) {
-                argues[i] = iteratee(argues[i])
+                argues[i] = f(argues[i])
             }
             for (var i = 0; i < array.length; i++) {
-                if (!(argues.includes(iteratee(array[i])))) {
+                if (!(argues.includes(f(array[i])))) {
                     res.push(array[i])
                 }
             }
@@ -196,7 +191,7 @@ var bairuobing = function() {
             return difference(array, ...args)
         }
     }
-    //isEqual 已经考虑到多种情况,故在此不多做考虑
+
     function differenceWith(array, ...args) {
         var comparator = iteratee(args.pop())
         var argues = flattenDeep(args)
@@ -233,7 +228,7 @@ var bairuobing = function() {
 
     function dropWhile(array, predicate = identity) {
         predicate = iteratee(predicate)
-        for (var i = array.length - 1; i >= 0; i--) {
+        for (var i = 0; i <= array.length - 1; i++) {
             if (!predicate(array[i])) {
                 return array.slice(i)
             }
@@ -259,7 +254,12 @@ var bairuobing = function() {
 
     function findLastIndex(array, predicate = identity, fromIndex = array.length - 1) {
         predicate = iteratee(predicate)
-
+        for (var i = fromIndex; i >= 0; i--) {
+            if (predicate(array[i])) {
+                return i
+            }
+        }
+        return -1
     }
 
     function head(array) {
@@ -414,11 +414,9 @@ var bairuobing = function() {
     function isEqual(value, other) {
         if (value === other) {
             return true
-        }
-        if (value !== value && other !== other) {
+        } else if (value !== value && other !== other) {
             return true
-        }
-        if ((Array.isArray(value)) && (Array.isArray(other))) {
+        } else if ((Array.isArray(value)) && (Array.isArray(other))) {
             if (value.length !== other.length) {
                 return false
             }
@@ -427,9 +425,8 @@ var bairuobing = function() {
                     return false
                 }
             }
-        }
-
-        if (typeof value === 'object' && typeof other === 'object') {
+            return true
+        } else if (typeof value === 'object' && typeof other === 'object') {
             if (Array.isArray(value) || Array.isArray(other)) {
                 return false
             }
@@ -441,12 +438,14 @@ var bairuobing = function() {
                 propName.push(item)
             }
             propName = uniq(propName)
-            for (var i = 0; i < propName.length; i++) {
-                if (!isEqual(value[i], other[i])) {
+            for (let prop of propName) {
+                if (!isEqual(value[prop], other[prop])) {
                     return false
                 }
             }
             return true
+        } else {
+            return false
         }
     }
     //用indexOf简化两层for循环

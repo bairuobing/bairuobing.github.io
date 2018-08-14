@@ -2,7 +2,7 @@
  * @Author: BaiRuobing
  * @Date:   2018-06-28 09:13:52
  * @Last Modified by:   BaiRuobing
- * @Last Modified time: 2018-08-11 23:36:11
+ * @Last Modified time: 2018-08-14 21:51:15
  */
 function ListNode(val) {
     this.val = val;
@@ -841,7 +841,7 @@ var restoreIpAddresses = function(s) {
 };
 
 var calculate = function(s) {
-    var str = s.replace(/\s+/g,"")
+    var str = s.replace(/\s+/g, "")
     var exp = str.split('')
     exp.push('\0')
 
@@ -852,7 +852,7 @@ var calculate = function(s) {
     var reg = /\d/
     var reg2 = /[\(\)\+\-\0]/
     while (sym_stack.length !== 0) {
-        if (reg.test(exp[i])) { //is操作数
+        if (reg.test(exp[i])) { //是操作数
             var num = 0
             while (reg.test(exp[i])) {
                 num = num * 10 + parseInt(exp[i++])
@@ -897,5 +897,42 @@ var calculate = function(s) {
         }
     }
     return num_stack.pop()
-
 };
+
+var decodeString = function(s) {
+    var res = ""
+    var num_stack = []
+    var sym_stack = []
+    var i = 0
+    while (i < s.length) {
+        if(/[a-zA-Z]|\[/.test(s[i])) {
+            sym_stack.push(s[i++])
+        } else if (/[0-9]/.test(s[i])) {
+            var n = 0
+            while(/[0-9]/.test(s[i])) {
+                n = n * 10 + parseInt(s[i])
+                i++
+            }
+            num_stack.push('' + n)
+        } else if (s[i] === ']') {
+            var num = num_stack.pop()
+            var unit = ""
+            while (sym_stack[sym_stack.length - 1] !== '[') {
+                unit = sym_stack.pop() + unit
+            }
+            sym_stack.pop() //去左括号
+            var tmp = unit
+            var tmp2 = ""
+            while(num > 0) {
+                
+                tmp2 = tmp + tmp2
+                num--
+            }
+            sym_stack.push(tmp2)
+            i++
+        }
+    }
+    res = sym_stack.join('')
+    return res
+};
+
