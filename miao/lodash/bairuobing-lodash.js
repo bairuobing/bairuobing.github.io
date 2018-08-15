@@ -218,9 +218,10 @@ var bairuobing = function() {
     }
 
     function dropRightWhile(array, predicate = identity) {
-        predicate = iteratee(predicate)
+        //为什么直接调用默认值 而不调用iterartee？？
+        let func = iteratee(predicate)
         for (var i = array.length - 1; i >= 0; i--) {
-            if (!predicate(array[i])) {
+            if (!func(array[i])) {
                 return array.slice(0, i + 1)
             }
         }
