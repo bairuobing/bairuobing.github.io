@@ -1,7 +1,7 @@
 var bairuobing = function() {
     return {
-        iteratee: iteratee,
         identity: identity,
+        iteratee: iteratee,
         property: property,
         matches: matches,
         matchesProperty: matchesProperty,
