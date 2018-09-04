@@ -2,7 +2,7 @@
  * @Author: BaiRuobing
  * @Date:   2018-06-28 09:13:52
  * @Last Modified by:   BaiRuobing
- * @Last Modified time: 2018-08-14 21:51:15
+ * @Last Modified time: 2018-08-30 21:02:34
  */
 function ListNode(val) {
     this.val = val;
@@ -905,11 +905,11 @@ var decodeString = function(s) {
     var sym_stack = []
     var i = 0
     while (i < s.length) {
-        if(/[a-zA-Z]|\[/.test(s[i])) {
+        if (/[a-zA-Z]|\[/.test(s[i])) {
             sym_stack.push(s[i++])
         } else if (/[0-9]/.test(s[i])) {
             var n = 0
-            while(/[0-9]/.test(s[i])) {
+            while (/[0-9]/.test(s[i])) {
                 n = n * 10 + parseInt(s[i])
                 i++
             }
@@ -923,8 +923,8 @@ var decodeString = function(s) {
             sym_stack.pop() //去左括号
             var tmp = unit
             var tmp2 = ""
-            while(num > 0) {
-                
+            while (num > 0) {
+
                 tmp2 = tmp + tmp2
                 num--
             }
@@ -936,3 +936,379 @@ var decodeString = function(s) {
     return res
 };
 
+function randomArray(num, largest = 10) {
+    //随机正整数数组，参数列表【数组元素个数，随机值最大值】
+    var ary = []
+    for (var i = 0; i < num; i++) {
+        ary.push(Math.floor(Math.random() * largest + 1))
+    }
+    return ary
+}
+class HeapOrPriortyQueue {
+    constructor() {
+        this.tree = new Array()
+    }
+
+    swap(idx1, idx2) {
+        var tmp = this.tree[idx1]
+        this.tree[idx1] = this.tree[idx2]
+        this.tree[idx2] = tmp
+    }
+
+    add(value) {
+        var index = this.tree.length
+        this.tree.push(value)
+        var parentIndext = Math.floor((index - 1) / 2)
+        while (index > 0) {
+            if (this.tree[index] < this.tree[parentIndext]) {
+                this.swap(index, parentIndext)
+                index = (index - 1) >> 1
+                parentIndext = (parentIndext - 1) >> 1
+            } else {
+                break
+            }
+        }
+        return this
+    }
+
+    delete() {
+        var target = this.tree[0]
+        var last = this.tree.pop()
+        this.tree[0] = last //至少会留有一个节点
+
+        var index = 0
+        while (true) {
+            var minIndex = index
+            if (this.tree[index * 2 + 1] < this.tree[minIndex]) {
+                minIndex = index * 2 + 1
+            }
+            if (this.tree[index * 2 + 2] < this.tree[minIndex]) {
+                minIndex = index * 2 + 2
+            }
+            if (index !== minIndex) {
+                this.swap(minIndex, index)
+                index = minIndex
+            } else {
+                break
+            }
+        }
+        return target
+    }
+}
+
+var mergeKLists = function(lists) {
+    if (lists.length === 0) {
+        return null
+    }
+    var result = [] //待数组转化为链表作为结果输出
+    var heap = new HeapOrPriortyQueueBasedList()
+    for (var i = 0; i < lists.length; i++) {
+        //将每个链表（整链）分别压入堆中
+        if (lists[i]) {
+            heap.add(lists[i])
+        }
+        //此时当已小顶堆（数组）将最小值冒出
+    }
+    while (heap.tree.length !== 0) {
+        var item = heap.delete()
+        result.push(item.val)
+        item = item.next
+        if (item) {
+            heap.add(item)
+        } else {
+            if (heap.tree.length === 0) {
+                break
+            }
+        }
+    }
+    var finalRes
+    return finalRes = array2list(result)
+
+};
+class HeapOrPriortyQueueBasedList {
+    //小顶堆，本题的没个结点应为链表
+    constructor() {
+        this.tree = new Array()
+    }
+
+    swap(idx1, idx2) {
+        var tmp = this.tree[idx1]
+        this.tree[idx1] = this.tree[idx2]
+        this.tree[idx2] = tmp
+    }
+
+    add(value) {
+        var index = this.tree.length
+        this.tree.push(value)
+        var parentIndext = Math.floor((index - 1) / 2)
+        while (index > 0) {
+            if (this.tree[index].val < this.tree[parentIndext].val) {
+                this.swap(index, parentIndext)
+                index = (index - 1) >> 1
+                parentIndext = (parentIndext - 1) >> 1
+            } else {
+                break
+            }
+        }
+        return this
+    }
+
+    delete() {
+        var target = this.tree[0]
+        var last = this.tree.pop()
+        if (this.tree.length === 0) {
+            return target
+        }
+        this.tree[0] = last
+
+        var index = 0
+        while (true) {
+            var minIndex = index
+            if ((this.tree[index * 2 + 1]) && (this.tree[index * 2 + 1].val < this.tree[minIndex].val)) {
+                minIndex = index * 2 + 1
+            }
+            if ((this.tree[index * 2 + 2]) && (this.tree[index * 2 + 2].val < this.tree[minIndex].val)) {
+                minIndex = index * 2 + 2
+            }
+            if (index !== minIndex) {
+                this.swap(minIndex, index)
+                index = minIndex
+            } else {
+                break
+            }
+        }
+        return target
+    }
+}
+
+var findRelativeRanks = function(nums) {
+    //排序
+    var sortNums = Array.prototype.slice.call(nums).sort((a, b) => b - a)
+    var map = {}
+    var result = []
+    for (var i = 0; i < nums.length; i++) {
+        var medal = i + 1
+        if (medal === 1) {
+            map[sortNums[i]] = 'Gold Medal'
+        } else if (medal === 2) {
+            map[sortNums[i]] = 'Silver Medal'
+        } else if (medal === 3) {
+            map[sortNums[i]] = 'Bronze Medal'
+        } else {
+            map[sortNums[i]] = '' + (i + 1)
+        }
+    }
+
+    for (var i = 0; i < nums.length; i++) {
+        result.push(map[nums[i]])
+    }
+    return result
+};
+
+
+// ==================== 451. Sort Characters By Frequency ===============
+
+
+var frequencySort = function(s) {
+    var arr = s.split('')
+    var obj = {}
+    for (var i = 0; i < arr.length; i++) {
+        var item = arr[i]
+        if (!obj[item]) {
+            obj[item] = 1
+        } else {
+            obj[item] = obj[item] + 1
+        }
+    }
+
+    //排序
+    var arr = []
+    for (var atrr in obj) {
+        arr.push([atrr, obj[atrr]])
+    }
+    arr.sort(function(a, b) {
+        return b[1] - a[1]
+
+    })
+    var result = ''
+    for (var i = 0; i < arr.length; i++) {
+        for (var j = 0; j < arr[i][1]; j++) {
+            result += arr[i][0]
+        }
+    }
+    return result
+};
+
+var calPoints = function(ops) {
+    function isNumber(n) {
+        var val = parseInt(n)
+        if (val != val) {
+            return false
+        }
+        return Object.prototype.toString.call(val) === '[object Number]'
+    }
+
+    var stack1 = []
+    var res = 0
+    for (var i = 0; i < ops.length; i++) {
+        if (isNumber(ops[i])) {
+            if (stack1[stack1.length - 1]) {
+                res += parseInt(ops[i])
+            } else {
+                res = parseInt(ops[i])
+            }
+            stack1.push(ops[i])
+        } else {
+            switch (ops[i]) {
+                case 'C':
+                    var div = stack1.pop()
+                    res -= parseInt(div)
+                    break
+                case 'D':
+                    var tmp = 2 * parseInt(stack1[stack1.length - 1])
+                    res += tmp
+                    stack1.push(tmp)
+                    break
+                case '+':
+                    var n1 = parseInt(stack1[stack1.length - 1])
+                    var n2 = parseInt(stack1[stack1.length - 2])
+                    var tmp = n1 + n2
+                    res += tmp
+                    stack1.push(tmp)
+                    break
+            }
+        }
+    }
+    return res
+};
+
+var nextGreaterElement = function(findNums, nums) {
+    var map = new Map()
+    var res = []
+    for (var i = 0; i < nums.length - 1; i++) {
+        var max = -1
+        for (var j = i + 1; j < nums.length; j++) {
+            if (nums[j] > nums[i]) {
+                max = nums[j]
+                break
+            }
+        }
+        map.set(nums[i], max)
+    }
+    for (var i = 0; i < findNums.length; i++) {
+        if (!map.has(findNums[i])) {
+            res.push(-1)
+        } else {
+            res.push(map.get(findNums[i]))
+        }
+    }
+    return res
+};
+
+var dailyTemperatures = function(temperatures) {
+    var res = []
+    var stack = []
+    for (var i = 0; i < temperatures.length; i++) {
+        if (stack.length === 0) {
+            stack.push(i)
+        } else {
+            while ((temperatures[i] > temperatures[stack[stack.length - 1]]) && (stack.length != 0)) {
+                var part = i - stack[stack.length - 1]
+                res[stack[stack.length - 1]] = part
+                stack.pop()
+            }
+            stack.push(i)
+        }
+    }
+    for (var i = 0; i < temperatures.length; i++) {
+        if (!res[i]) {
+            res[i] = 0
+        }
+    }
+    return res
+};
+
+var generate = function(numRows) {
+    var result = []
+    for (var x = 0; x < numRows; x++) {
+        result[x] = new Array()
+    }
+    var i = 0
+    while (i < numRows) {
+        for (var j = 0; j <= i; j++) {
+            if (j === 0 || j === i) {
+                result[i][j] = 1
+            } else {
+                result[i][j] = result[i - 1][j - 1] + result[i - 1][j]
+            }
+        }
+        i++
+    }
+    return result
+};
+
+var isIsomorphic = function(s, t) {
+    var mapS = {}
+    var mapT = {}
+
+    for (var i = 0; i < s.length; i++) {
+        var valueS = s[i]
+        var valueT = t[i]
+
+        if (!mapS[valueS]) {
+            mapS[valueS] = valueT
+        } else if (mapS[valueS] != valueT) {
+            return false
+        }
+
+        if (!mapT[valueT]) {
+            mapT[valueT] = valueS
+        } else if (mapT[valueT] != valueS) {
+            return false
+        }
+    }
+
+    return true
+};
+
+var flatten = function(root) {
+    if (!root) {
+        return
+    }
+    if (root.left) {
+        flatten(root.left)
+    }
+    if (root.right) {
+        flatten(root.right)
+    }
+    var tmp = root.right
+    root.right = root.left
+    root.left = null
+    while (root.right) {
+        root = root.right
+    }
+    root.right = tmp
+};
+
+var thirdMax = function(nums) {
+    let first = nums[0]
+    let second = -Infinity
+    let third = -Infinity
+    for (var i = 1; i < nums.length; i++) {
+        if (nums[i] > first) {
+            third = second
+            second = first
+            first = nums[i]
+        } else if (nums[i] > second && nums[i] !== first) {
+            third = second
+            second = nums[i]
+        } else if (nums[i] > third && nums[i] !== first && nums[i] !== second) {
+            third = nums[i]
+        }
+    }
+    if (third === -Infinity) {
+        return first
+    } else {
+        return third
+    }
+};
