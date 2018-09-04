@@ -23,4 +23,4 @@ var conn = net.connect(10010, '192.168.31.242')
 
 conn.write('xxxxxxx')
 
-conn.on('data', data => console.log(data.toString()))//恢复的消息的接收
+conn.on('data', data => console.log(data.toString()))//回复的消息的接收

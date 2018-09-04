@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>drag_element</title>
+</head>
+<style>
+    #ele {
+        position: absolute;
+        left:500px;
+        top:250px;
+        width: 200px;
+        height: 180px;
+        border-radius: 15px;
+        background-color: rgba(0,120,215);
+    }
+</style>
+<body>
+    <div><h1></h1></div>
+    <div id="ele"></div>
+</body>
+<script>
+    var ele = document.querySelector('#ele')
+    var txt = document.querySelector('h1')
+
+
+    var origin_x
+    var origin_y
+    var origin_pos_X = parseInt(window.getComputedStyle(ele,null).getPropertyValue("left"))
+    var origin_pos_Y = parseInt(window.getComputedStyle(ele,null).getPropertyValue("top"))
+    txt.innerHTML = "(" + origin_pos_X + "px," + origin_pos_Y + "px)"
+    ele.addEventListener('mousedown',happend)
+
+    function happend(event){ 
+        
+        origin_x = event.pageX
+        origin_y = event.pageY
+        
+        if(event.which === 1) {
+            ele.addEventListener("mousemove",moved)
+            event.preventDefault()
+        }
+    }
+
+    function buttonPressed(event) {
+        if(event.buttons === null) {
+            return event.which != 0
+        } else {
+            return event.buttons != 0
+        }
+    }
+
+    function moved(event) {
+        if(!buttonPressed(event)) {
+            ele.removeEventListener("mousemove",moved)
+            origin_pos_X = parseInt(ele.style.left)
+            origin_pos_Y = parseInt(ele.style.top)
+            console.log("moved Clear!")
+        } else {
+            ele.style.left = origin_pos_X + (event.pageX - origin_x) + 'px'
+            ele.style.top = origin_pos_Y + (event.pageY - origin_y) + 'px'
+            txt.innerHTML = "(" + ele.style.left + "," + ele.style.top + ")"
+            console.log(ele.style.left + "," + ele.style.top)
+        }
+    }
+</script>
+</html>

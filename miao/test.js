@@ -2,7 +2,7 @@
  * @Author: BaiRuobing
  * @Date:   2018-06-28 09:13:52
  * @Last Modified by:   BaiRuobing
- * @Last Modified time: 2018-08-30 21:02:34
+ * @Last Modified time: 2018-09-04 16:00:41
  */
 function ListNode(val) {
     this.val = val;
@@ -1312,3 +1312,4 @@ var thirdMax = function(nums) {
         return third
     }
 };
+
