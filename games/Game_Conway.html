@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Game Conway</title>
+    <style>
+        button {
+            position: absolute;
+            top: 200px;
+            width: 100px;
+            height: 60px;
+        }
+    </style>
+</head>
+<body>
+    <canvas width="1200" height="600"></canvas>
+    <button onclick="run()">RUN</button>
+</body>
+<script>
+    var cvs = document.querySelector('canvas')
+    var ctx = cvs.getContext('2d')
+
+    function dot(x, y, color = 'red') {
+        ctx.fillStyle = color
+        ctx.fillRect(x, y, 14, 14)
+    }
+    function make2DArray(rows, cols) {
+        let ary = new Array(rows)
+        for(let i = 0; i < ary.length; i++) {
+            ary[i] = new Array(cols)
+        }
+        return ary
+    }
+    
+
+
+    // console.table(grid)
+    // 初始化一个矩阵
+    let rows = 40
+    let cols = 100
+    let times = 15
+    let grid = make2DArray(rows, cols)
+    for (let i = 0; i < rows; i++) {
+        for (let j = 0; j < cols; j++) {
+            grid[i][j] = Math.round(Math.random())
+            //Math.random() < rate ? 1 :0
+            if (grid[i][j] == 1) {
+                dot(j *times, i *times)
+            } else if (grid[i][j] == 0) {
+                dot(j *times, i *times, 'black')
+            }
+        }
+    }
+
+    function countNeighbors(grid, x, y) {
+        let sum = 0
+        for(let i = x - 1; i <= x + 1; i++) {
+            for(let j = y - 1; j <= y + 1; j++) {
+                if(i == -1 || j == -1 || i == rows || j == cols) {
+                    return 1 //特殊边界情况暂且不考虑
+                }
+                sum += grid[i][j]
+            }
+        }
+        return sum - grid[x][y]
+    }
+
+    let start = null
+    
+    function animate(timestamp) {
+        let next = grid.slice()
+        if(!start) {
+            start = timestamp
+        }
+        var seed = timestamp - start
+        //不能就地变换，要一次性变换 
+        debugger;
+        for (let i = 0; i < rows; i++) {
+            for (let j = 0; j < cols; j++) {
+                let state = grid[i][j]
+                if(state == 1) {
+                    if(countNeighbors(grid, i, j) < 2 || countNeighbors(grid, i, j) > 3) {
+                        next[i][j] = 0 
+                    } else if (countNeighbors(grid, i, j) == 2 || countNeighbors(grid, i, j) == 3) {
+                        next[i][j] = state
+                    }
+                } else if (state == 0 && (countNeighbors(grid, i, j) == 3)){
+                    next[i][j] = 1
+                }
+            }
+        }
+
+        for (let i = 0; i < rows; i++) {
+            for (let j = 0; j < cols; j++) {
+                if (next[i][j] == 1) {
+                    dot(j*times, i*times)
+                } else if (next[i][j] == 0) {
+                    dot(j*times, i*times, 'black')
+                }
+            }
+        }
+
+        requestAnimationFrame(animate)
+    }
+    function run() {
+        requestAnimationFrame(animate)
+    }
+    
+
+</script>
+</html>

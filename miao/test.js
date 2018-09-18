@@ -2,7 +2,7 @@
  * @Author: BaiRuobing
  * @Date:   2018-06-28 09:13:52
  * @Last Modified by:   BaiRuobing
- * @Last Modified time: 2018-09-04 16:00:41
+ * @Last Modified time: 2018-09-12 16:36:40
  */
 function ListNode(val) {
     this.val = val;
@@ -1313,3 +1313,25 @@ var thirdMax = function(nums) {
     }
 };
 
+//异步Map
+function asyncMap(ary, asyncMapper, callback) {
+    let result = []
+    let count = 0
+    for (let i = 0; i < ary.length; i++) {
+        asyncMapper(ary[i], function(err, val) {
+            count++
+            result[i] = val
+            if (count === ary.length()) {
+                callback(null, result) //每一项都处理完成则调用callback
+            }
+        })
+    }
+}
+
+function square(val, callback) {
+    callback(null, val * val)
+}
+
+// asyncMap([1,2,3,4,5], square, function(err, results) {
+//     results is now an array of stats for each file
+// });

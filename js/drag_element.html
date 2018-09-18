@@ -37,7 +37,7 @@
         origin_y = event.pageY
         
         if(event.which === 1) {
-            ele.addEventListener("mousemove",moved)
+            window.addEventListener("mousemove",moved)
             event.preventDefault()
         }
     }
@@ -52,7 +52,8 @@
 
     function moved(event) {
         if(!buttonPressed(event)) {
-            ele.removeEventListener("mousemove",moved)
+            //绑定在window上面，因为鼠标指针的刷新率赶不上window的刷新率
+            window.removeEventListener("mousemove",moved)
             origin_pos_X = parseInt(ele.style.left)
             origin_pos_Y = parseInt(ele.style.top)
             console.log("moved Clear!")

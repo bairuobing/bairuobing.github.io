@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>LS</title>
+    <script>
+        function loadAss(filename) {
+            var content = localStorage.getItem(filename)
+            if (content) {
+                var tag
+                if (filename.endsWith('.css')) {
+                    tag = document.createElement('style')
+                } else if (filename.endsWith('.js')) {
+                    tag = document.createElement('script')
+                }
+
+                tag.textContent = content
+                document.head.appendChild(tag)
+            } else {
+                var xhr = new XMLHttpRequest()
+                xhr.open('GET', filename)
+                xhr.send()
+                xhr.onload = function() {
+                    localStorage.setItem(filename, xhr.responseText)
+                    loadAss(filename) //异步递归
+                }
+            }
+        }
+    </script>
+    <script>
+        loadAss("fuck.css")
+        loadAss("hello.css")
+        loadAss("world.js")
+        loadAss("shit.js")
+    </script>
+<!--     <link rel="stylesheet" href="fuck.css">
+    <link rel="stylesheet" href="hello.css">
+    <script src="world.js"></script>
+    <script src="shit.js"></script> -->
+</head>
+<body>
+    <h1>跑起来！</h1>
+</body>
+</html>
