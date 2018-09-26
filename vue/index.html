@@ -6,14 +6,18 @@
 </head>
 <body>
     <div id="app">
-        <input type="text">
-        <span id="name">{{name}}</span>
-
-        <input type="text">
-        <span id="age">{{age}}</span>
-
-        <input type="text">
-        <span id="gender">{{gender}}</span>
+        <div>
+            <input type="text" v-model="name">
+            <span v-show="name">名字是：{{name}}</span>
+        </div>
+        <div>
+            <input type="text" v-model="age">
+            <span v-show="age">年龄是：{{age}}</span>
+        </div>
+        <div>
+            <input type="text" v-model="gender">
+            <span v-show="gender">性别是：{{gender}}</span>
+        </div>
     </div>
 </body>
 <script src="https://cdn.bootcss.com/vue/2.5.16/vue.js"></script>
