@@ -1,25 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <title>vue</title>
+    <title>vue-practice</title>
 </head>
+
 <body>
     <div id="app">
-        <div>
-            <input type="text" v-model="name">
-            <span v-show="name">名字是：{{name}}</span>
-        </div>
-        <div>
-            <input type="text" v-model="age">
-            <span v-show="age">年龄是：{{age}}</span>
-        </div>
-        <div>
-            <input type="text" v-model="gender">
-            <span v-show="gender">性别是：{{gender}}</span>
-        </div>
+        <ol>
+            <todo-item 
+                v-for="item in groceryList" 
+                v-bind:todo="item" 
+                v-bind:key="item.id">
+            </todo-item>
+        </ol>
     </div>
 </body>
-<script src="https://cdn.bootcss.com/vue/2.5.16/vue.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.16/vue.js"></script>
 <script src="js/main.js"></script>
+
 </html>

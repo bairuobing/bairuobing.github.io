@@ -1,15 +1,15 @@
-/*
-* @Author: BaiRuobing
-* @Date:   2018-09-18 20:22:10
-* @Last Modified by:   BaiRuobing
-* @Last Modified time: 2018-09-18 21:55:13
-*/
-var app = new Vue({
-    el: '#app',
-    data: {
-        name: 'Bob',
-        age: 12,
-        gender: 'meal'
-    }
-});
+Vue.component('todo-item', {
+  props: ['todo'],
+  template: '<li>{{ todo.text }}</li>'
+})
 
+var app = new Vue({
+  el: '#app',
+  data: {
+    groceryList: [
+      { id: 0, text: '2' },
+      { id: 1, text: '奶酪' },
+      { id: 2, text: '随便其它什么人吃的东西' }
+    ]
+  }
+})
